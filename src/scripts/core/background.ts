@@ -53,10 +53,10 @@ void main(){
   xi += vec3(.75,.55,.22) * pow(smoothstep(.6,1.,r.y), 4.) * .45;
   xi += vec3(.5,.06,.04) * glow * .3;
   
-  // astronaut: deep space, icy cyan, neon blue
-  vec3 as = mix(vec3(.012,.015,.022), vec3(.02,.05,.12), smoothstep(.3,.95,f));
-  as += vec3(.0,.4,.8) * pow(smoothstep(.55,1.,f), 3.) * 1.1;
-  as += vec3(.0,.8,1.) * glow * .3;
+  // astronaut: grayscale metallic, white stardust, red glow
+  vec3 as = mix(vec3(.01,.01,.012), vec3(.05,.05,.06), smoothstep(.3,.95,f));
+  as += vec3(.8,.8,.8) * pow(smoothstep(.55,1.,f), 3.) * .8;
+  as += vec3(1.,0.,0.) * glow * .3;
 
   vec3 col = cy * u_cyber + xi * u_xianxia + as * u_astro;
   col *= 1. - .6 * dot(uv-.5, uv-.5) * 1.8;
@@ -212,7 +212,7 @@ export function initParticles(canvas: HTMLCanvasElement | null) {
         const x = cx + x0 * Math.cos(s.tilt) - y0 * Math.sin(s.tilt);
         const y = cy + x0 * Math.sin(s.tilt) + y0 * Math.cos(s.tilt);
         if (mode === 'astronaut') {
-          ctx.fillStyle = s.hue > 0.82 ? `rgba(255,255,255,${0.8 * fade})` : `rgba(0,255,255,${0.85 * fade})`;
+          ctx.fillStyle = s.hue > 0.82 ? `rgba(255,46,63,${0.85 * fade})` : `rgba(255,255,255,${0.9 * fade})`;
         } else {
           ctx.fillStyle = s.hue > 0.82 ? `rgba(237,233,227,${0.7 * fade})` : `rgba(255,46,63,${0.75 * fade})`;
         }

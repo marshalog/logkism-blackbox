@@ -95,18 +95,18 @@
    Astronaut Explorer mode overrides
    ========================================================================== */
 [data-mode='astronaut'] {
-  --bg: #050a12;
-  --bg-2: #081220;
-  --bg-3: #102035;
-  --fg: #e6f2ff;
-  --muted: #8ca3bc;
-  --dim: #546a82;
-  --accent: #00d2ff;
-  --accent-hi: #00ffff;
-  --accent-deep: #005a80;
-  --line: rgba(0, 210, 255, 0.15);
-  --line-2: rgba(0, 210, 255, 0.3);
-  --line-accent: rgba(0, 255, 255, 0.6);
-  --glow: rgba(0, 255, 255, 0.5);
-  --ok: #00ffaa;
+  --bg: #030304;
+  --bg-2: #0b0b0e;
+  --bg-3: #121216;
+  --fg: #ffffff;
+  --muted: #888890;
+  --dim: #44444a;
+  --accent: #ffffff;
+  --accent-hi: #ff2e3f;
+  --accent-deep: #7a0a12;
+  --line: rgba(255, 255, 255, 0.15);
+  --line-2: rgba(255, 255, 255, 0.25);
+  --line-accent: rgba(255, 46, 63, 0.6);
+  --glow: rgba(255, 46, 63, 0.5);
+  --ok: #36c97f;
 }

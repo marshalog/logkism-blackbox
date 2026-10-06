@@ -57,6 +57,21 @@ body.has-cursor .cursor {
   opacity: 1;
   animation: spin 10s linear infinite;
 }
+.cursor__rocket {
+  opacity: 0;
+  color: var(--fg);
+  transform: rotate(45deg); /* Point up-right by default */
+  transition: opacity 0.3s;
+}
+[data-mode='astronaut'] .cursor__reticle {
+  opacity: 0;
+}
+[data-mode='astronaut'] .cursor__bagua {
+  opacity: 0;
+}
+[data-mode='astronaut'] .cursor__rocket {
+  opacity: 1;
+}
 [data-mode='xianxia'] .cursor__dot {
   width: 6px;
   height: 6px;
@@ -296,12 +311,73 @@ html.is-arriving .curtain {
   background: radial-gradient(circle at 50% 50%, rgba(80, 40, 10, 0.5), #0a0706 70%);
 }
 [data-mode='astronaut'] .warp {
-  background: radial-gradient(circle at 50% 50%, rgba(0, 90, 128, 0.5), #050a12 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(40, 40, 45, 0.8), #030304 70%);
 }
 [data-mode='xianxia'] .warp__panel {
   border-color: rgba(201, 162, 75, 0.5);
   font-family: var(--f-head);
   font-size: 14px;
+}
+
+/* --- Aerospace Fleet --- */
+.astro-fleet {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  display: none;
+  overflow: hidden;
+}
+[data-mode='astronaut'] .astro-fleet {
+  display: block;
+}
+.astro-fleet__unit {
+  position: absolute;
+  color: rgba(255, 46, 63, 0.12);
+  will-change: transform;
+}
+.astro-fleet__unit svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.astro-fleet__unit--f22 {
+  width: 100px;
+  height: 100px;
+  left: -150px;
+  top: 15%;
+  animation: fly-tr 18s linear infinite;
+}
+.astro-fleet__unit--su57 {
+  width: 140px;
+  height: 140px;
+  right: -200px;
+  bottom: 25%;
+  color: rgba(255, 255, 255, 0.08);
+  animation: fly-tl 25s linear infinite;
+  animation-delay: 4s;
+}
+.astro-fleet__unit--drone {
+  width: 50px;
+  height: 50px;
+  left: 20%;
+  bottom: -100px;
+  color: rgba(255, 255, 255, 0.05);
+  animation: fly-up 30s linear infinite;
+  animation-delay: 2s;
+}
+
+@keyframes fly-tr {
+  0% { transform: translate(0, 0) scale(0.5); }
+  100% { transform: translate(120vw, -90vh) scale(1.8); }
+}
+@keyframes fly-tl {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-120vw, -70vh) scale(0.5); }
+}
+@keyframes fly-up {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(15vw, -120vh) rotate(360deg); }
 }
 [data-mode='xianxia'] .warp__log .ok {
   color: var(--gold);
