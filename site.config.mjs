@@ -6,7 +6,7 @@ export const PORTFOLIO_REPO = 'logkism-portfolio';
 const isProd = process.argv.includes('build') || process.env.CI === 'true';
 
 export const SITE = `https://${GITHUB_USER}.github.io`;
-export const BASE = isProd ? `/${REPO}` : '/';
+export const BASE = isProd ? `/${REPO}/` : '/';
 
 // Where portfolio lives (dev: portfolio on :4321)
 export const PORTFOLIO_URL =

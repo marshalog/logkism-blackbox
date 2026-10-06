@@ -66,7 +66,6 @@ const { current = 'blog' } = Astro.props;
               <svg viewBox="0 0 24 24" class="mode-btn__icon-astro" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(45 12 12)"/><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(-45 12 12)"/></svg>
             </div>
           </div>
-          <span class="mode-btn__label">SYS // MODE</span>
         </button>
         <div class="mode-menu">
           <button type="button" class="mode-opt" data-mode-set="cyber">
@@ -257,24 +256,22 @@ const { current = 'blog' } = Astro.props;
   .mode-btn {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    justify-content: center;
     background: transparent;
-    border: 1px solid var(--line);
-    padding: 0.25rem 0.8rem 0.25rem 0.4rem;
+    border: none;
+    padding: 0;
     color: var(--fg);
-    font-family: var(--f-mono);
-    font-size: 10px;
     cursor: pointer;
-    transition: border-color 0.3s, color 0.3s;
+    border-radius: 50%;
+    transition: color 0.3s;
   }
   .mode-btn:hover {
-    border-color: var(--accent-hi);
     color: var(--accent-hi);
   }
   .mode-btn__logo {
     position: relative;
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
