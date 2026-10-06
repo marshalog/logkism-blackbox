@@ -58,6 +58,10 @@ body.has-cursor .cursor {
   animation: spin 10s linear infinite;
 }
 .cursor__rocket {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
   opacity: 0;
   color: var(--fg);
   transform: rotate(45deg); /* Point up-right by default */
@@ -321,9 +325,9 @@ html.is-arriving .curtain {
 
 /* --- Aerospace Fleet --- */
 .astro-fleet {
-  position: fixed;
+  position: absolute; /* Relative to .bg-stack */
   inset: 0;
-  z-index: -1;
+  z-index: 1; /* Above artwork layer */
   pointer-events: none;
   display: none;
   overflow: hidden;
@@ -333,7 +337,7 @@ html.is-arriving .curtain {
 }
 .astro-fleet__unit {
   position: absolute;
-  color: rgba(255, 46, 63, 0.12);
+  color: rgba(255, 46, 63, 0.03); /* Extremely faint */
   will-change: transform;
 }
 .astro-fleet__unit svg {
@@ -342,27 +346,27 @@ html.is-arriving .curtain {
   transform: rotate(45deg);
 }
 .astro-fleet__unit--f22 {
-  width: 100px;
-  height: 100px;
-  left: -150px;
+  width: 50px;
+  height: 50px;
+  left: -100px;
   top: 15%;
   animation: fly-tr 18s linear infinite;
 }
 .astro-fleet__unit--su57 {
-  width: 140px;
-  height: 140px;
-  right: -200px;
+  width: 70px;
+  height: 70px;
+  right: -100px;
   bottom: 25%;
-  color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.02); /* fainter */
   animation: fly-tl 25s linear infinite;
   animation-delay: 4s;
 }
 .astro-fleet__unit--drone {
-  width: 50px;
-  height: 50px;
+  width: 24px;
+  height: 24px;
   left: 20%;
-  bottom: -100px;
-  color: rgba(255, 255, 255, 0.05);
+  bottom: -50px;
+  color: rgba(255, 255, 255, 0.03);
   animation: fly-up 30s linear infinite;
   animation-delay: 2s;
 }

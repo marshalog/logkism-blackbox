@@ -1,3 +1,5 @@
+import { BASE } from '../../site.config.mjs';
+
 export interface Post {
   slug: string;
   title: string;
@@ -24,7 +26,7 @@ export const POSTS: Post[] = [
 <h2 class="accent" style="margin-top: 1rem; font-size: 1.5em; letter-spacing: 0.1em;">[+] 01 // VULNERABILITY OVERVIEW</h2>
 <p>Trong quá trình tham gia một chương trình Private Bug Bounty cho một tập đoàn tài chính lớn, đội ngũ <b>LOGKISM</b> đã phát hiện ra một chuỗi lỗ hổng cực kỳ nghiêm trọng. Kẻ tấn công có thể bypass hệ thống WAF (Web Application Firewall) lớp ngoài và khai thác lỗ hổng <b>Insecure Deserialization</b> bên trong ứng dụng Java Spring Boot để đạt được Remote Code Execution (RCE).</p>
 
-<img src="/images/bg_cyber.jpg" alt="WAF Block Graph" style="width: 100%; height: auto; border: 1px solid var(--line-accent); margin: 1.5rem 0; box-shadow: 0 0 20px var(--glow);" />
+<img src="${BASE}images/waf_poc.jpg" alt="WAF Block Graph" style="width: 100%; height: auto; border: 1px solid var(--line-accent); margin: 1.5rem 0; box-shadow: 0 0 20px var(--glow);" />
 <em style="color: var(--muted); font-size: 0.85em; display: block; text-align: center; margin-top: -1rem; margin-bottom: 2rem;">Hình 1: Đồ thị lưu lượng mạng bị WAF block (Tái hiện).</em>
 
 <h2 class="accent" style="margin-top: 2rem; font-size: 1.5em; letter-spacing: 0.1em;">[+] 02 // RECONNAISSANCE & WAF BYPASS</h2>
