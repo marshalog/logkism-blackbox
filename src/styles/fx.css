@@ -295,6 +295,9 @@ html.is-arriving .curtain {
 [data-mode='xianxia'] .warp {
   background: radial-gradient(circle at 50% 50%, rgba(80, 40, 10, 0.5), #0a0706 70%);
 }
+[data-mode='astronaut'] .warp {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 90, 128, 0.5), #050a12 70%);
+}
 [data-mode='xianxia'] .warp__panel {
   border-color: rgba(201, 162, 75, 0.5);
   font-family: var(--f-head);

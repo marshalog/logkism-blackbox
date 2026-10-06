@@ -10,7 +10,9 @@ precision mediump float;
 uniform vec2 u_res;
 uniform float u_time;
 uniform vec2 u_mouse;
-uniform float u_mode;
+uniform float u_cyber;
+uniform float u_xianxia;
+uniform float u_astro;
 uniform float u_scroll;
 
 float hash(vec2 p){ p = fract(p*vec2(123.34, 456.21)); p += dot(p, p+45.32); return fract(p.x*p.y); }
@@ -50,8 +52,13 @@ void main(){
   vec3 xi = mix(vec3(.035,.026,.022), vec3(.13,.05,.035), smoothstep(.3,.95,f));
   xi += vec3(.75,.55,.22) * pow(smoothstep(.6,1.,r.y), 4.) * .45;
   xi += vec3(.5,.06,.04) * glow * .3;
+  
+  // astronaut: deep space, icy cyan, neon blue
+  vec3 as = mix(vec3(.012,.015,.022), vec3(.02,.05,.12), smoothstep(.3,.95,f));
+  as += vec3(.0,.4,.8) * pow(smoothstep(.55,1.,f), 3.) * 1.1;
+  as += vec3(.0,.8,1.) * glow * .3;
 
-  vec3 col = mix(cy, xi, u_mode);
+  vec3 col = cy * u_cyber + xi * u_xianxia + as * u_astro;
   col *= 1. - .6 * dot(uv-.5, uv-.5) * 1.8;
   gl_FragColor = vec4(col, 1.);
 }`;
@@ -81,7 +88,8 @@ export function initNebula(canvas: HTMLCanvasElement | null) {
   gl.enableVertexAttribArray(loc);
   gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
   const U = (n: string) => gl.getUniformLocation(prog, n);
-  const uRes = U('u_res'), uTime = U('u_time'), uMouse = U('u_mouse'), uMode = U('u_mode'), uScroll = U('u_scroll');
+  const uRes = U('u_res'), uTime = U('u_time'), uMouse = U('u_mouse'), 
+        uCyber = U('u_cyber'), uXianxia = U('u_xianxia'), uAstro = U('u_astro'), uScroll = U('u_scroll');
 
   const SCALE = 0.45;
   const resize = () => {
@@ -98,9 +106,21 @@ export function initNebula(canvas: HTMLCanvasElement | null) {
     mouse.ty = 1 - e.clientY / innerHeight;
   }, { passive: true });
 
-  const state = { mode: getMode() === 'xianxia' ? 1 : 0 };
+  const m0 = getMode();
+  const state = { 
+    cyber: m0 === 'cyber' ? 1 : 0, 
+    xianxia: m0 === 'xianxia' ? 1 : 0, 
+    astro: m0 === 'astronaut' ? 1 : 0 
+  };
   addEventListener('lk:mode', (e) => {
-    gsap.to(state, { mode: (e as CustomEvent<Mode>).detail === 'xianxia' ? 1 : 0, duration: 1.6, ease: 'power2.inOut' });
+    const m = (e as CustomEvent<Mode>).detail;
+    gsap.to(state, {
+      cyber: m === 'cyber' ? 1 : 0,
+      xianxia: m === 'xianxia' ? 1 : 0,
+      astro: m === 'astronaut' ? 1 : 0,
+      duration: 1.6,
+      ease: 'power2.inOut'
+    });
   });
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -115,7 +135,9 @@ export function initNebula(canvas: HTMLCanvasElement | null) {
     gl.uniform2f(uRes, canvas.width, canvas.height);
     gl.uniform1f(uTime, reduce ? 20 : (now - t0) / 1000);
     gl.uniform2f(uMouse, mouse.x, mouse.y);
-    gl.uniform1f(uMode, state.mode);
+    gl.uniform1f(uCyber, state.cyber);
+    gl.uniform1f(uXianxia, state.xianxia);
+    gl.uniform1f(uAstro, state.astro);
     gl.uniform1f(uScroll, scrollY / Math.max(1, document.body.scrollHeight));
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   };
@@ -181,7 +203,7 @@ export function initParticles(canvas: HTMLCanvasElement | null) {
     ctx.fillRect(0, 0, W, H);
     ctx.globalCompositeOperation = 'lighter';
 
-    if (mode === 'cyber') {
+    if (mode === 'cyber' || mode === 'astronaut') {
       const cx = W * 0.62, cy = H * 0.42, R = Math.max(W, H) * 0.6;
       for (const s of sats) {
         s.ang += s.sp;
@@ -189,7 +211,11 @@ export function initParticles(canvas: HTMLCanvasElement | null) {
         const y0 = Math.sin(s.ang) * s.b * R;
         const x = cx + x0 * Math.cos(s.tilt) - y0 * Math.sin(s.tilt);
         const y = cy + x0 * Math.sin(s.tilt) + y0 * Math.cos(s.tilt);
-        ctx.fillStyle = s.hue > 0.82 ? `rgba(237,233,227,${0.7 * fade})` : `rgba(255,46,63,${0.75 * fade})`;
+        if (mode === 'astronaut') {
+          ctx.fillStyle = s.hue > 0.82 ? `rgba(255,255,255,${0.8 * fade})` : `rgba(0,255,255,${0.85 * fade})`;
+        } else {
+          ctx.fillStyle = s.hue > 0.82 ? `rgba(237,233,227,${0.7 * fade})` : `rgba(255,46,63,${0.75 * fade})`;
+        }
         ctx.fillRect(x, y, s.size * dpr, s.size * dpr);
       }
     } else {

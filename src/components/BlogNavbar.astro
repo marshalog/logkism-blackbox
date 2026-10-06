@@ -49,23 +49,27 @@ const { current = 'blog' } = Astro.props;
         <span class="hud-status__clock mono" data-utc>00:00:00 UTC</span>
       </div>
 
-      <!-- Mode Toggle Button (Tu Tien Mode / Cyber Mode) -->
-      <button
-        type="button"
-        class="mode-toggle"
-        data-mode-toggle
-        data-magnetic="0.4"
-        data-cursor="REALM_SHIFT"
-        aria-label="Toggle Tu Tiên / Cyber Mode"
-        title="Chuyển chế độ Tu Tiên / Cyber (Alt+X)"
-      >
-        <svg viewBox="0 0 44 44">
-          <circle cx="22" cy="22" r="20" fill="none" stroke="currentColor" stroke-width="1" opacity="0.25"/>
-          <circle cx="22" cy="22" r="16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="6 4" class="mode-toggle__ring"/>
-        </svg>
-        <span class="mode-toggle__glyph">修</span>
-        <span class="mode-toggle__tip">Alt+X · Tu Tiên Mode</span>
-      </button>
+      <!-- Mode Dropdown -->
+      <div class="mode-dropdown" data-cursor="MODE_SELECT">
+        <button type="button" class="mode-btn" aria-label="Select Mode">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span class="mode-btn__label">SYS // MODE</span>
+        </button>
+        <div class="mode-menu">
+          <button type="button" class="mode-opt" data-mode-set="cyber">
+            <span class="mode-opt__id">01</span>
+            <span class="mode-opt__label">CYBER_SEC</span>
+          </button>
+          <button type="button" class="mode-opt" data-mode-set="xianxia">
+            <span class="mode-opt__id">02</span>
+            <span class="mode-opt__label">XIANXIA_DAO</span>
+          </button>
+          <button type="button" class="mode-opt" data-mode-set="astronaut">
+            <span class="mode-opt__id">03</span>
+            <span class="mode-opt__label">ASTRO_EXPLORE</span>
+          </button>
+        </div>
+      </div>
 
       <!-- Warp Jump Back to Portfolio (MISSION CONTROL) -->
       <a
@@ -222,5 +226,79 @@ const { current = 'blog' } = Astro.props;
   .hud-status__clock {
     font-size: 10px;
     color: var(--muted);
+  }
+  
+  /* Dropdown Styles */
+  .mode-dropdown {
+    position: relative;
+  }
+  .mode-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--line);
+    padding: 0.35rem 0.8rem;
+    color: var(--fg);
+    font-family: var(--f-mono);
+    font-size: 10px;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .mode-btn:hover {
+    border-color: var(--accent-hi);
+    color: var(--accent-hi);
+  }
+  .mode-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: max-content;
+    background: rgba(13, 13, 17, 0.95);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .mode-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .mode-opt {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line-2);
+    color: var(--muted);
+    font-family: var(--f-mono);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .mode-opt:last-child {
+    border-bottom: none;
+  }
+  .mode-opt:hover {
+    background: rgba(193, 18, 31, 0.1);
+    color: var(--fg);
+  }
+  [data-mode="xianxia"] .mode-opt:hover { background: rgba(212, 175, 55, 0.1); }
+  [data-mode="astronaut"] .mode-opt:hover { background: rgba(0, 255, 255, 0.1); }
+  
+  .mode-opt__id {
+    font-size: 9px;
+    color: var(--accent-hi);
+  }
+  .mode-opt__label {
+    font-size: 11px;
+    letter-spacing: 0.05em;
   }
 </style>

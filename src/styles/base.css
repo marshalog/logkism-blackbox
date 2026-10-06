@@ -262,6 +262,16 @@ textarea {
 [data-mode='xianxia'] .bg-art--xian {
   opacity: 0.55;
 }
+.bg-art--astro {
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+[data-mode='astronaut'] .bg-art--cyber {
+  opacity: 0;
+}
+[data-mode='astronaut'] .bg-art--astro {
+  opacity: 0.45;
+}
 .bg-grain {
   position: absolute;
   inset: -50%;
