@@ -186,6 +186,11 @@ textarea {
   background: linear-gradient(90deg, var(--line-accent), var(--line) 60%, transparent);
   transform-origin: left;
 }
+[data-mode='astronaut'] .sec-head__rule {
+  background: none;
+  border-bottom: 2px dashed var(--line-accent);
+  opacity: 0.7;
+}
 .sec-head__tag {
   font-family: var(--f-mono);
   font-size: var(--fs-micro);
@@ -334,6 +339,14 @@ textarea {
 .hud-frame i:nth-child(2) { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
 .hud-frame i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
 .hud-frame i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+
+[data-mode='astronaut'] .hud-frame i {
+  display: none;
+}
+[data-mode='astronaut'] .hud-frame {
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+}
 
 /* altitude rail (scroll progress) */
 .alt-rail {
