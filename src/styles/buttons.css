@@ -1,0 +1,472 @@
+/* ==========================================================================
+   Buttons — shaped, layered, never default
+   Layers: ::before = edge (border colour, clipped)  ::after = inner body
+           .btn__fill = hover wipe     .btn__label / .btn__icon = content
+   ========================================================================== */
+.btn {
+  --shape: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  --edge: var(--line-accent);
+  --body: rgba(10, 10, 14, 0.75);
+  --fill: var(--accent);
+  --ink: var(--fg);
+  --ink-hover: var(--bone);
+
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  height: 3.4rem;
+  padding: 0 1.4rem 0 1.6rem;
+  font-family: var(--f-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.45s var(--ease-out), transform 0.3s var(--ease-out);
+}
+.btn::before,
+.btn::after,
+.btn__fill {
+  content: '';
+  position: absolute;
+  clip-path: var(--shape);
+  pointer-events: none;
+}
+.btn::before {
+  inset: 0;
+  z-index: -3;
+  background: var(--edge);
+  transition: background 0.4s var(--ease-out);
+}
+.btn::after {
+  inset: 1px;
+  z-index: -2;
+  background: var(--body);
+}
+.btn__fill {
+  inset: 0;
+  z-index: -1;
+  background: var(--fill);
+  clip-path: var(--shape);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-io);
+  overflow: hidden;
+}
+.btn__fill::after {
+  /* sheen sweeping through the fill */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+.btn__label {
+  position: relative;
+}
+.btn__icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  overflow: hidden;
+}
+.btn__icon svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.55s var(--ease-io);
+}
+.btn__icon svg + svg {
+  position: absolute;
+  transform: translateX(-180%);
+}
+/* notch tab — tiny aerospace-ish detail */
+.btn__tab {
+  position: absolute;
+  top: -1px;
+  left: 22px;
+  width: 26px;
+  height: 3px;
+  background: var(--accent-hi);
+  transition: width 0.5s var(--ease-out), background 0.3s;
+}
+.btn:hover {
+  color: var(--ink-hover);
+}
+.btn:hover .btn__fill {
+  transform: scaleX(1);
+}
+.btn:hover .btn__fill::after {
+  transform: translateX(120%);
+  transition: transform 0.9s 0.25s var(--ease-out);
+}
+.btn:hover .btn__icon svg:first-child {
+  transform: translateX(180%);
+}
+.btn:hover .btn__icon svg + svg {
+  transform: translateX(0);
+}
+.btn:hover .btn__tab {
+  width: 60px;
+  background: var(--bone);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* primary: solid crimson body, bone wipe */
+.btn--primary {
+  --edge: var(--accent-hi);
+  --body: var(--accent);
+  --fill: var(--bone);
+  --ink: var(--bone);
+  --ink-hover: var(--void);
+  box-shadow: 0 0 0 transparent;
+  filter: drop-shadow(0 10px 30px rgba(193, 18, 31, 0.35));
+}
+.btn--primary .btn__tab {
+  background: var(--bone);
+}
+.btn--primary:hover .btn__tab {
+  background: var(--accent-hi);
+}
+
+/* ghost: wire-frame */
+.btn--ghost {
+  --edge: var(--line-2);
+  --body: rgba(7, 7, 10, 0.55);
+}
+.btn--ghost:hover {
+  --edge: var(--accent-hi);
+}
+
+/* small */
+.btn--sm {
+  height: 2.6rem;
+  padding: 0 1rem 0 1.15rem;
+  gap: 0.6rem;
+  font-size: var(--fs-micro);
+  --shape: polygon(9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 9px);
+}
+.btn--sm .btn__tab {
+  left: 14px;
+  width: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   ORB button — pill + detached rotating ring that docks on hover
+   -------------------------------------------------------------------------- */
+.btn-orb {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  font-family: var(--f-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg);
+  cursor: pointer;
+}
+.btn-orb__label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 3.4rem;
+  padding: 0 1.6rem;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: rgba(7, 7, 10, 0.6);
+  overflow: hidden;
+  transition: border-color 0.4s, padding 0.6s var(--ease-out);
+}
+.btn-orb__label::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  border-radius: inherit;
+  transform: translateY(101%);
+  transition: transform 0.6s var(--ease-io);
+  z-index: -1;
+}
+.btn-orb__label span {
+  position: relative;
+}
+.btn-orb__ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  margin-left: 0.35rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bone);
+  transition: transform 0.6s var(--ease-out), margin 0.6s var(--ease-out), background 0.4s;
+}
+.btn-orb__ring::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px dashed var(--line-accent);
+  animation: spin 12s linear infinite;
+}
+.btn-orb__ring svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.6s var(--ease-io);
+}
+.btn-orb:hover .btn-orb__label {
+  border-color: var(--accent);
+  padding-right: 2.2rem;
+}
+.btn-orb:hover .btn-orb__label::before {
+  transform: translateY(0);
+}
+.btn-orb:hover .btn-orb__ring {
+  margin-left: -1.4rem;
+  background: var(--bone);
+  color: var(--void);
+}
+.btn-orb:hover .btn-orb__ring svg {
+  transform: rotate(45deg);
+}
+.btn-orb:hover .btn-orb__ring::before {
+  animation-duration: 2s;
+  border-color: var(--accent-hi);
+}
+
+/* --------------------------------------------------------------------------
+   HEX icon button
+   -------------------------------------------------------------------------- */
+.btn-hex {
+  --hex: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 3.6rem;
+  height: 3.2rem;
+  color: var(--fg);
+  transition: color 0.3s, transform 0.4s var(--ease-snap);
+}
+.btn-hex::before,
+.btn-hex::after {
+  content: '';
+  position: absolute;
+  clip-path: var(--hex);
+  z-index: -1;
+  transition: background 0.35s, transform 0.5s var(--ease-out);
+}
+.btn-hex::before {
+  inset: 0;
+  background: var(--line-2);
+}
+.btn-hex::after {
+  inset: 1px;
+  background: var(--bg-2);
+}
+.btn-hex svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.5s var(--ease-snap);
+}
+.btn-hex:hover {
+  color: var(--bone);
+  transform: translateY(-3px);
+}
+.btn-hex:hover::before {
+  background: var(--accent-hi);
+}
+.btn-hex:hover::after {
+  background: var(--accent);
+}
+.btn-hex:hover svg {
+  transform: rotate(-12deg) scale(1.1);
+}
+
+/* --------------------------------------------------------------------------
+   Text link with slashed underline
+   -------------------------------------------------------------------------- */
+.link-slash {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--fg);
+}
+.link-slash::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--accent-hi) 0 6px, transparent 6px 9px);
+  transform: scaleX(0.25);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-out);
+}
+.link-slash:hover::after {
+  transform: scaleX(1);
+}
+
+/* --------------------------------------------------------------------------
+   MODE TOGGLE — reactor seal (cyber) / 八卦 seal (xianxia)
+   -------------------------------------------------------------------------- */
+.mode-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--fg);
+}
+.mode-toggle svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.mode-toggle__ring {
+  animation: spin 18s linear infinite;
+  transform-origin: center;
+  transition: opacity 0.4s;
+}
+.mode-toggle__glyph {
+  position: relative;
+  font-family: var(--f-cjk);
+  font-size: 19px;
+  line-height: 1;
+  color: var(--accent-hi);
+  transition: transform 0.6s var(--ease-snap), color 0.3s, text-shadow 0.3s;
+}
+.mode-toggle:hover .mode-toggle__glyph {
+  transform: scale(1.2) rotate(-8deg);
+  text-shadow: 0 0 12px var(--glow);
+}
+.mode-toggle:hover .mode-toggle__ring {
+  animation-duration: 3s;
+}
+.mode-toggle__tip {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  padding: 0.4rem 0.6rem;
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: var(--bg-3);
+  border: 1px solid var(--line-2);
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: 0.3s var(--ease-out);
+}
+.mode-toggle:hover .mode-toggle__tip {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   修仙 button skins — talisman ribbons, seals, gold leaf
+   ========================================================================== */
+[data-mode='xianxia'] .btn {
+  --shape: polygon(0 0, 100% 0, calc(100% - 12px) 50%, 100% 100%, 0 100%, 12px 50%);
+  --edge: rgba(201, 162, 75, 0.55);
+  --body: rgba(18, 12, 10, 0.85);
+  --fill: var(--accent);
+  font-family: var(--f-head);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  padding: 0 1.9rem 0 2rem;
+}
+[data-mode='xianxia'] .btn__tab {
+  left: 50%;
+  translate: -50% 0;
+  width: 8px;
+  height: 8px;
+  top: -4px;
+  rotate: 45deg;
+  background: var(--gold);
+}
+[data-mode='xianxia'] .btn:hover .btn__tab {
+  width: 8px;
+  rotate: 225deg;
+  transition: rotate 0.6s var(--ease-out);
+}
+[data-mode='xianxia'] .btn--primary {
+  --edge: #e2c27a;
+  --body: linear-gradient(180deg, #e3c77d, #c9a24b 60%, #b08a3a);
+  --fill: var(--accent);
+  --ink: #5b0a0e;
+  --ink-hover: #f7ead0;
+  filter: drop-shadow(0 8px 26px rgba(201, 162, 75, 0.3));
+}
+[data-mode='xianxia'] .btn--primary .btn__icon {
+  /* red seal stamp */
+  background: #a3121c;
+  color: #f7ead0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 2px rgba(255, 220, 200, 0.25);
+}
+[data-mode='xianxia'] .btn--ghost {
+  --edge: rgba(201, 162, 75, 0.35);
+}
+[data-mode='xianxia'] .btn--ghost:hover {
+  --edge: var(--gold);
+}
+[data-mode='xianxia'] .btn--sm {
+  --shape: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%, 8px 50%);
+  padding: 0 1.3rem;
+}
+
+[data-mode='xianxia'] .btn-orb__label {
+  border-color: rgba(201, 162, 75, 0.35);
+  font-family: var(--f-head);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+[data-mode='xianxia'] .btn-orb__ring {
+  background: radial-gradient(circle at 35% 30%, #e63b2e, #8a0d14 70%);
+  box-shadow: 0 0 24px rgba(230, 59, 46, 0.45);
+}
+[data-mode='xianxia'] .btn-orb__ring::before {
+  border: 1px solid rgba(201, 162, 75, 0.6);
+  border-style: dotted;
+}
+
+[data-mode='xianxia'] .btn-hex {
+  --hex: circle(48% at 50% 50%);
+}
+[data-mode='xianxia'] .btn-hex::before {
+  background: rgba(201, 162, 75, 0.45);
+}
+[data-mode='xianxia'] .btn-hex:hover::after {
+  background: radial-gradient(circle, #b3121e, #5e0a0f);
+}
+
+[data-mode='xianxia'] .link-slash::after {
+  background: linear-gradient(90deg, var(--gold), transparent);
+  height: 2px;
+}

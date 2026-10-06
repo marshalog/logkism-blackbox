@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogNavbar from '../../components/BlogNavbar.astro';
+import BlogFooter from '../../components/BlogFooter.astro';
+import { POSTS, type Post } from '../../data/posts';
+import { BASE } from '../../../site.config.mjs';
+
+export function getStaticPaths() {
+  return POSTS.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+---
+
+<BaseLayout title={post.title} description={post.summary}>
+  <BlogNavbar current="blog" />
+
+  <main id="main-content" class="post-layout">
+    <article class="wrap post-article">
+      <!-- Back button -->
+      <div class="post-back" data-reveal="0.1">
+        <a href={`${BASE}`} class="link-slash f-mono" data-cursor="BACK">
+          ← TRỞ VỀ DANH SÁCH BÀI VIẾT // TRANSMISSIONS
+        </a>
+      </div>
+
+      <!-- Article Header -->
+      <header class="post-header panel brackets" data-reveal="0.2">
+        <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
+        <div class="post-header__meta f-mono">
+          <span class="accent">// CLASSIFICATION: {post.classification}</span>
+          <span class="meta-sep">·</span>
+          <span>DATE: {post.date}</span>
+          <span class="meta-sep">·</span>
+          <span>EST. READING: {post.readTime}</span>
+        </div>
+
+        <h1 class="post-title f-display" data-split="chars">
+          {post.title}
+        </h1>
+
+        <div class="post-tags f-mono">
+          {post.tags.map((tag) => (
+            <span class="tag-badge">#{tag}</span>
+          ))}
+        </div>
+      </header>
+
+      <!-- Article Content Body -->
+      <div class="post-body panel brackets f-mono" data-reveal="0.3">
+        <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
+        <div class="markdown-render" set:html={post.content.replace(/\n\n/g, '<br/><br/>')} />
+      </div>
+
+      <!-- Post End Navigation -->
+      <div class="post-end panel" data-reveal="0.4">
+        <div class="post-end__inner">
+          <div>
+            <span class="micro accent">END OF TRANSMISSION FILE</span>
+            <p class="f-mono text-muted">Báo cáo bảo mật được xác thực chữ ký mã khoá Ed25519 bởi LOGKISM.</p>
+          </div>
+          <a href={`${BASE}`} class="btn btn--primary" data-cursor="INDEX">
+            <span class="btn__tab"></span>
+            <span class="btn__fill"></span>
+            <span class="btn__label">DANH MỤC KHÁC ↗</span>
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <BlogFooter />
+</BaseLayout>
+
+<style>
+  .post-layout {
+    padding-top: calc(var(--hud-h) + 2rem);
+    padding-bottom: 5rem;
+  }
+  .post-article {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .post-back {
+    margin-bottom: 0.5rem;
+  }
+  .post-header {
+    padding: clamp(2rem, 5vw, 3.5rem);
+    background: rgba(13, 13, 17, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .post-header__meta {
+    font-size: var(--fs-xs);
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    color: var(--muted);
+  }
+  .post-title {
+    font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+    line-height: 1.1;
+    color: var(--fg);
+  }
+  .post-tags {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .tag-badge {
+    font-size: 11px;
+    color: var(--accent-hi);
+    padding: 3px 8px;
+    border: 1px solid var(--line-accent);
+    background: rgba(193, 18, 31, 0.08);
+  }
+
+  .post-body {
+    padding: clamp(2rem, 5vw, 3.5rem);
+    background: rgba(13, 13, 17, 0.6);
+    font-size: var(--fs-sm);
+    line-height: 1.9;
+    color: var(--fg);
+  }
+  .markdown-render {
+    white-space: pre-wrap;
+    font-family: var(--f-mono);
+  }
+
+  .post-end {
+    padding: 2rem;
+    background: rgba(22, 22, 28, 0.5);
+  }
+  .post-end__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+</style>

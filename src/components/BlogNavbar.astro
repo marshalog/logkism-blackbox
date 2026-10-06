@@ -1,0 +1,226 @@
+---
+import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
+
+interface Props {
+  current?: string;
+}
+
+const { current = 'blog' } = Astro.props;
+---
+
+<header class="hud-nav" role="banner">
+  <div class="hud-nav__inner wrap">
+    <!-- Brand / Call sign -->
+    <a href={`${BASE}`} class="hud-brand" data-cursor="BLACKBOX" aria-label="BLACKBOX Intelligence Log">
+      <div class="hud-brand__mark">
+        <span class="hud-brand__sigil">BB</span>
+        <span class="hud-brand__radar"></span>
+      </div>
+      <div class="hud-brand__info">
+        <span class="hud-brand__name f-display">BLACKBOX</span>
+        <span class="hud-brand__sub micro t-cyber">INTEL_LOG // DECLASSIFIED</span>
+        <span class="hud-brand__sub micro t-xian cjk">Tàng Kinh Các · Mật Lục</span>
+      </div>
+    </a>
+
+    <!-- Navigation links -->
+    <nav class="hud-links" aria-label="Blog Navigation">
+      <a href={`${BASE}`} class={`hud-link ${current === 'blog' ? 'is-active' : ''}`} data-cursor="ALL">
+        <span class="hud-link__idx">01</span>
+        <span class="t-cyber">ALL TRANSMISSIONS</span>
+        <span class="t-xian cjk">Toàn Bộ Mật Điển</span>
+      </a>
+      <a href={`${BASE}#categories`} class={`hud-link ${current === 'categories' ? 'is-active' : ''}`} data-cursor="SECTORS">
+        <span class="hud-link__idx">02</span>
+        <span class="t-cyber">SECTORS & TAGS</span>
+        <span class="t-xian cjk">Phân Loại Tâm Pháp</span>
+      </a>
+      <a href={`${BASE}#feed`} class={`hud-link ${current === 'archive' ? 'is-active' : ''}`} data-cursor="CHRONO">
+        <span class="hud-link__idx">03</span>
+        <span class="t-cyber">LOG CHRONOLOGY</span>
+        <span class="t-xian cjk">Niên Giám</span>
+      </a>
+    </nav>
+
+    <!-- Right Controls: UTC clock, Mode Toggle, Warp to Mission Control (Portfolio) -->
+    <div class="hud-ctrls">
+      <div class="hud-status" aria-label="Telemetry status">
+        <span class="dot dot--red"></span>
+        <span class="hud-status__clock mono" data-utc>00:00:00 UTC</span>
+      </div>
+
+      <!-- Mode Toggle Button (Tu Tien Mode / Cyber Mode) -->
+      <button
+        type="button"
+        class="mode-toggle"
+        data-mode-toggle
+        data-magnetic="0.4"
+        data-cursor="REALM_SHIFT"
+        aria-label="Toggle Tu Tiên / Cyber Mode"
+        title="Chuyển chế độ Tu Tiên / Cyber (Alt+X)"
+      >
+        <svg viewBox="0 0 44 44">
+          <circle cx="22" cy="22" r="20" fill="none" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+          <circle cx="22" cy="22" r="16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="6 4" class="mode-toggle__ring"/>
+        </svg>
+        <span class="mode-toggle__glyph">修</span>
+        <span class="mode-toggle__tip">Alt+X · Tu Tiên Mode</span>
+      </button>
+
+      <!-- Warp Jump Back to Portfolio (MISSION CONTROL) -->
+      <a
+        href={PORTFOLIO_URL}
+        class="btn btn--sm btn--primary btn-warp"
+        data-warp="MISSION CONTROL // PORTFOLIO"
+        data-cursor="WARP_DRIVE"
+      >
+        <span class="btn__tab"></span>
+        <span class="btn__fill"></span>
+        <span class="btn__label t-cyber">MISSION CONTROL ↖</span>
+        <span class="btn__label t-xian cjk">Về Tổng Đà ↖</span>
+        <span class="btn__icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 4L4 12M4 12H10M4 12V6"/>
+          </svg>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 4L4 12M4 12H10M4 12V6"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hud-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--hud-h);
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    background: rgba(7, 7, 10, 0.7);
+  }
+  [data-mode='xianxia'] .hud-nav {
+    background: rgba(10, 7, 6, 0.75);
+    border-bottom-color: var(--line);
+  }
+  .hud-nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: 1.5rem;
+  }
+  .hud-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .hud-brand__mark {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    background: var(--bg-2);
+    border: 1px solid var(--line-accent);
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  }
+  .hud-brand__sigil {
+    font-family: var(--f-display);
+    font-size: 13px;
+    color: var(--accent-hi);
+    letter-spacing: 0.05em;
+  }
+  .hud-brand__radar {
+    position: absolute;
+    inset: -3px;
+    border: 1px dashed var(--line-2);
+    border-radius: 50%;
+    animation: spin 16s linear infinite;
+  }
+  .hud-brand__name {
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    color: var(--fg);
+    display: block;
+  }
+  .hud-brand__sub {
+    display: block;
+    font-size: 8px;
+    color: var(--muted);
+  }
+  .hud-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  @media (max-width: 990px) {
+    .hud-links {
+      display: none;
+    }
+  }
+  .hud-link {
+    font-family: var(--f-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    position: relative;
+    padding: 0.4rem 0;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .hud-link__idx {
+    font-size: 9px;
+    color: var(--accent-hi);
+  }
+  .hud-link:hover,
+  .hud-link.is-active {
+    color: var(--fg);
+  }
+  .hud-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent-hi);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s var(--ease-out);
+  }
+  .hud-link:hover::after,
+  .hud-link.is-active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .hud-ctrls {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .hud-status {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--line);
+    background: rgba(22, 22, 28, 0.4);
+  }
+  @media (max-width: 600px) {
+    .hud-status {
+      display: none;
+    }
+  }
+  .hud-status__clock {
+    font-size: 10px;
+    color: var(--muted);
+  }
+</style>
