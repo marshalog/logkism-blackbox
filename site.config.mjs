@@ -1,5 +1,5 @@
 // Central deploy config for BLACKBOX blog
-export const GITHUB_USER = 'logkism';
+export const GITHUB_USER = 'marshalog';
 export const REPO = 'logkism-blackbox';
 export const PORTFOLIO_REPO = 'logkism-portfolio';
 
