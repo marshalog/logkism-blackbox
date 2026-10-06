@@ -43,20 +43,19 @@ body.has-cursor .cursor {
   height: 100%;
   overflow: visible;
 }
-.cursor__reticle {
+.cursor__icon-cyber, .cursor__icon-xian, .cursor__icon-astro {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  opacity: 0;
+  visibility: hidden;
   color: var(--fg);
+  transition: opacity 0.3s, transform 0.2s;
 }
-.cursor__bagua {
-  opacity: 0;
-  color: var(--gold);
-}
-[data-mode='xianxia'] .cursor__reticle {
-  opacity: 0;
-}
-[data-mode='xianxia'] .cursor__bagua {
-  opacity: 1;
-  animation: spin 10s linear infinite;
-}
+[data-mode='cyber'] .cursor__icon-cyber { opacity: 1; visibility: visible; }
+[data-mode='xianxia'] .cursor__icon-xian { opacity: 1; visibility: visible; }
+[data-mode='astronaut'] .cursor__icon-astro { opacity: 1; visibility: visible; }
 [data-mode='xianxia'] .cursor__dot {
   width: 6px;
   height: 6px;
@@ -65,11 +64,11 @@ body.has-cursor .cursor {
   background: #ffd38a;
   box-shadow: 0 0 14px 3px rgba(230, 120, 46, 0.7);
 }
-.cursor.is-hover .cursor__reticle {
-  transform: rotate(45deg) scale(1.55);
-}
-.cursor.is-hover .cursor__bagua {
-  transform: scale(1.5);
+.cursor.is-hover .cursor__icon-cyber,
+.cursor.is-hover .cursor__icon-xian,
+.cursor.is-hover .cursor__icon-astro {
+  transform: scale(1.55);
+  color: var(--accent-hi);
 }
 .cursor.is-down .cursor__ring > div {
   transform: scale(0.7);
@@ -295,10 +294,74 @@ html.is-arriving .curtain {
 [data-mode='xianxia'] .warp {
   background: radial-gradient(circle at 50% 50%, rgba(80, 40, 10, 0.5), #0a0706 70%);
 }
+[data-mode='astronaut'] .warp {
+  background: radial-gradient(circle at 50% 50%, rgba(40, 40, 45, 0.8), #030304 70%);
+}
 [data-mode='xianxia'] .warp__panel {
   border-color: rgba(201, 162, 75, 0.5);
   font-family: var(--f-head);
   font-size: 14px;
+}
+
+/* --- Aerospace Fleet --- */
+.astro-fleet {
+  position: absolute; /* Relative to .bg-stack */
+  inset: 0;
+  z-index: 1; /* Above artwork layer */
+  pointer-events: none;
+  display: none;
+  overflow: hidden;
+}
+[data-mode='astronaut'] .astro-fleet {
+  display: block;
+}
+.astro-fleet__unit {
+  position: absolute;
+  color: rgba(255, 46, 63, 0.15); /* More visible against dark bg */
+  will-change: transform;
+}
+.astro-fleet__unit svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.astro-fleet__unit--f22 {
+  width: 50px;
+  height: 50px;
+  left: -100px;
+  top: 15%;
+  animation: fly-tr 18s linear infinite;
+}
+.astro-fleet__unit--su57 {
+  width: 70px;
+  height: 70px;
+  right: -100px;
+  bottom: 25%;
+  color: rgba(255, 255, 255, 0.1); /* visible */
+  animation: fly-tl 25s linear infinite;
+  animation-delay: 4s;
+}
+.astro-fleet__unit--drone {
+  width: 24px;
+  height: 24px;
+  left: 20%;
+  bottom: -50px;
+  color: rgba(255, 255, 255, 0.15);
+  animation: fly-up 30s linear infinite;
+  animation-delay: 2s;
+}
+
+@keyframes fly-tr {
+  0% { transform: translate(0, 0) scale(0.5); }
+  100% { transform: translate(120vw, -90vh) scale(1.8); }
+}
+@keyframes fly-tl {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-120vw, -70vh) scale(0.5); }
+}
+@keyframes fly-up {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(15vw, -120vh) rotate(360deg); }
 }
 [data-mode='xianxia'] .warp__log .ok {
   color: var(--gold);
