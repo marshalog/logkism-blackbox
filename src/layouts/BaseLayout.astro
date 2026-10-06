@@ -10,7 +10,7 @@ const {
   title,
   description = "BLACKBOX // Classified CyberSec Write-ups & Aerospace Telemetry Research Articles.",
   siteName = "LOGKISM // BLACKBOX",
-  image = "/images/bg_cyber.jpg"
+  image = "images/bg_cyber.jpg"
 } = Astro.props;
 
 import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
@@ -39,10 +39,10 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href={`${BASE}styles/tokens.css`.replace('//', '/')} />
-    <link rel="stylesheet" href={`${BASE}styles/base.css`.replace('//', '/')} />
-    <link rel="stylesheet" href={`${BASE}styles/buttons.css`.replace('//', '/')} />
-    <link rel="stylesheet" href={`${BASE}styles/fx.css`.replace('//', '/')} />
+    <link rel="stylesheet" href={`${BASE}/styles/tokens.css`.replace('//', '/')} />
+    <link rel="stylesheet" href={`${BASE}/styles/base.css`.replace('//', '/')} />
+    <link rel="stylesheet" href={`${BASE}/styles/buttons.css`.replace('//', '/')} />
+    <link rel="stylesheet" href={`${BASE}/styles/fx.css`.replace('//', '/')} />
 
     <script is:inline>
       try {
@@ -57,8 +57,8 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
     <!-- Background Canvas and Artwork Stack -->
     <div class="bg-stack" aria-hidden="true">
       <canvas id="nebula-canvas"></canvas>
-      <div class="bg-art bg-art--cyber" style="background-image: url('/images/bg_cyber.jpg');"></div>
-      <div class="bg-art bg-art--xian" style="background-image: url('/images/bg_xianxia.jpg');"></div>
+      <div class="bg-art bg-art--cyber" style={`background-image: url('${BASE}/images/bg_cyber.jpg'.replace('//', '/'));`}></div>
+      <div class="bg-art bg-art--xian" style={`background-image: url('${BASE}/images/bg_xianxia.jpg'.replace('//', '/'));`}></div>
       <canvas id="particle-canvas"></canvas>
       <div class="bg-scan"></div>
       <div class="bg-grain"></div>
