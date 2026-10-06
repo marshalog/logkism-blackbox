@@ -43,39 +43,18 @@ body.has-cursor .cursor {
   height: 100%;
   overflow: visible;
 }
-.cursor__reticle {
-  color: var(--fg);
-}
-.cursor__bagua {
-  opacity: 0;
-  color: var(--gold);
-}
-[data-mode='xianxia'] .cursor__reticle {
-  opacity: 0;
-}
-[data-mode='xianxia'] .cursor__bagua {
-  opacity: 1;
-  animation: spin 10s linear infinite;
-}
-.cursor__rocket {
+.cursor__icon-cyber, .cursor__icon-xian, .cursor__icon-astro {
   position: absolute;
   width: 24px;
   height: 24px;
   margin: -12px 0 0 -12px;
-  opacity: 0;
+  display: none;
   color: var(--fg);
-  transform: rotate(45deg); /* Point up-right by default */
-  transition: opacity 0.3s;
+  transition: opacity 0.3s, transform 0.2s;
 }
-[data-mode='astronaut'] .cursor__reticle {
-  opacity: 0;
-}
-[data-mode='astronaut'] .cursor__bagua {
-  opacity: 0;
-}
-[data-mode='astronaut'] .cursor__rocket {
-  opacity: 1;
-}
+[data-mode='cyber'] .cursor__icon-cyber { display: block; }
+[data-mode='xianxia'] .cursor__icon-xian { display: block; }
+[data-mode='astronaut'] .cursor__icon-astro { display: block; }
 [data-mode='xianxia'] .cursor__dot {
   width: 6px;
   height: 6px;
@@ -84,11 +63,11 @@ body.has-cursor .cursor {
   background: #ffd38a;
   box-shadow: 0 0 14px 3px rgba(230, 120, 46, 0.7);
 }
-.cursor.is-hover .cursor__reticle {
-  transform: rotate(45deg) scale(1.55);
-}
-.cursor.is-hover .cursor__bagua {
-  transform: scale(1.5);
+.cursor.is-hover .cursor__icon-cyber,
+.cursor.is-hover .cursor__icon-xian,
+.cursor.is-hover .cursor__icon-astro {
+  transform: scale(1.55);
+  color: var(--accent-hi);
 }
 .cursor.is-down .cursor__ring > div {
   transform: scale(0.7);

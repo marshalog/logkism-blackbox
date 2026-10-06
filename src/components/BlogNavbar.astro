@@ -11,14 +11,17 @@ const { current = 'blog' } = Astro.props;
 <header class="hud-nav" role="banner">
   <div class="hud-nav__inner wrap">
     <!-- Brand / Call sign -->
-    <a href={`${BASE}`} class="hud-brand" data-cursor="BLACKBOX" aria-label="BLACKBOX Intelligence Log">
+    <a href={`${BASE}`} class="hud-brand" data-cursor="BLACKBOX" aria-label="SOOLOGNZ Intelligence Log">
       <div class="hud-brand__mark">
-        <span class="hud-brand__sigil">BB</span>
+        <svg viewBox="0 0 24 24" class="hud-brand__sigil" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 20px; height: 20px;">
+          <path d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z" stroke-linejoin="round"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
         <span class="hud-brand__radar"></span>
       </div>
       <div class="hud-brand__info">
-        <span class="hud-brand__name f-display">BLACKBOX</span>
-        <span class="hud-brand__sub micro t-cyber">INTEL_LOG // DECLASSIFIED</span>
+        <span class="hud-brand__name f-display">SOOLOGNZ</span>
+        <span class="hud-brand__sub micro t-cyber">BLOG // DECLASSIFIED</span>
         <span class="hud-brand__sub micro t-xian cjk">Tàng Kinh Các · Mật Lục</span>
       </div>
     </a>
@@ -42,12 +45,8 @@ const { current = 'blog' } = Astro.props;
       </a>
     </nav>
 
-    <!-- Right Controls: UTC clock, Mode Toggle, Warp to Mission Control (Portfolio) -->
+    <!-- Right Controls: Mode Toggle, Warp to Mission Control (Portfolio) -->
     <div class="hud-ctrls">
-      <div class="hud-status" aria-label="Telemetry status">
-        <span class="dot dot--red"></span>
-        <span class="hud-status__clock mono" data-utc>00:00:00 UTC</span>
-      </div>
 
       <!-- Mode Dropdown -->
       <div class="mode-dropdown" data-cursor="MODE_SELECT">
@@ -62,8 +61,8 @@ const { current = 'blog' } = Astro.props;
               <svg viewBox="0 0 24 24" class="mode-btn__icon-cyber" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 2 17 12 22 22 17 22 7 12 2" /><circle cx="12" cy="12" r="4" stroke-dasharray="2 2" /></svg>
               <!-- Xianxia Icon -->
               <svg viewBox="0 0 24 24" class="mode-btn__icon-xian" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20 5 5 0 0 1 0-10 5 5 0 0 0 0-10z" fill="currentColor"/><circle cx="12" cy="7" r="1.5" fill="currentColor"/><circle cx="12" cy="17" r="1.5" fill="var(--bg)"/></svg>
-              <!-- Astronaut Icon -->
-              <svg viewBox="0 0 24 24" class="mode-btn__icon-astro" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(45 12 12)"/><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(-45 12 12)"/></svg>
+              <!-- Astronaut Icon (Rocket) -->
+              <svg viewBox="0 0 24 24" class="mode-btn__icon-astro" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2 C14 6 15 13 15 18 L18 22 L6 22 L9 18 C9 13 10 6 12 2 Z" stroke-linejoin="round" /><path d="M10 22 L10 25 M12 22 L12 26 M14 22 L14 25" stroke-dasharray="2 2" /></svg>
             </div>
           </div>
         </button>
@@ -83,7 +82,7 @@ const { current = 'blog' } = Astro.props;
             </div>
           </button>
           <button type="button" class="mode-opt" data-mode-set="astronaut">
-            <svg viewBox="0 0 24 24" class="mode-opt__icon" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(45 12 12)"/><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(-45 12 12)"/></svg>
+            <svg viewBox="0 0 24 24" class="mode-opt__icon" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2 C14 6 15 13 15 18 L18 22 L6 22 L9 18 C9 13 10 6 12 2 Z" stroke-linejoin="round" /><path d="M10 22 L10 25 M12 22 L12 26 M14 22 L14 25" stroke-dasharray="2 2" /></svg>
             <div class="mode-opt__text">
               <span class="mode-opt__id">03</span>
               <span class="mode-opt__label">ASTRO_EXPLORE</span>

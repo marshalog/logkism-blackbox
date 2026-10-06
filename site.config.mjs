@@ -1,7 +1,7 @@
 // Central deploy config for BLACKBOX blog
 export const GITHUB_USER = 'marshalog';
-export const REPO = 'logkism-blackbox';
-export const PORTFOLIO_REPO = 'logkism-portfolio';
+export const REPO = 'soolognz-blog';
+export const PORTFOLIO_REPO = 'logkism';
 
 const isProd = process.argv.includes('build') || process.env.CI === 'true';
 
