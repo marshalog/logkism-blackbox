@@ -95,18 +95,21 @@
    Astronaut Explorer mode overrides
    ========================================================================== */
 [data-mode='astronaut'] {
-  --bg: #030304;
-  --bg-2: #0b0b0e;
-  --bg-3: #121216;
-  --fg: #ffffff;
-  --muted: #888890;
-  --dim: #44444a;
-  --accent: #ffffff;
-  --accent-hi: #ff2e3f;
-  --accent-deep: #7a0a12;
-  --line: rgba(255, 255, 255, 0.15);
-  --line-2: rgba(255, 255, 255, 0.25);
-  --line-accent: rgba(255, 46, 63, 0.6);
-  --glow: rgba(255, 46, 63, 0.5);
+  --bg: #050505;
+  --bg-2: #0e0e0e;
+  --bg-3: #161616;
+  --fg: #f4f4f5;
+  --muted: #a1a1aa;
+  --dim: #52525b;
+  --accent: #ffb700;       /* Amber / Aerospace Gold */
+  --accent-hi: #ffcc33;    /* Bright Gold */
+  --accent-deep: #cc9900;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-2: rgba(255, 255, 255, 0.22);
+  --line-accent: rgba(255, 204, 51, 0.5);
+  --glow: rgba(255, 204, 51, 0.4);
   --ok: #36c97f;
+  
+  --f-display: 'Saira Variable', 'Chakra Petch', sans-serif;
+  --f-head: 'Saira Variable', 'Chakra Petch', sans-serif;
 }

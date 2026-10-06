@@ -270,7 +270,7 @@ textarea {
   opacity: 0;
 }
 [data-mode='astronaut'] .bg-art--astro {
-  opacity: 0.45;
+  opacity: 0.15;
 }
 .bg-grain {
   position: absolute;
@@ -291,6 +291,14 @@ textarea {
 }
 [data-mode='xianxia'] .bg-scan {
   opacity: 0;
+}
+[data-mode='astronaut'] .bg-scan {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+  opacity: 1;
 }
 .bg-vignette {
   position: absolute;
@@ -432,6 +440,14 @@ textarea {
   top: calc(100% - var(--cut));
   left: 0;
 }
+[data-mode='astronaut'] .panel {
+  clip-path: none;
+  border-radius: 8px;
+}
+[data-mode='astronaut'] .panel::before,
+[data-mode='astronaut'] .panel::after {
+  display: none;
+}
 
 /* corner brackets decoration */
 .brackets {
@@ -452,6 +468,15 @@ textarea {
 .brackets:hover > .bk:nth-of-type(2) { transform: translate(5px, -5px); }
 .brackets:hover > .bk:nth-of-type(3) { transform: translate(-5px, 5px); }
 .brackets:hover > .bk:nth-of-type(4) { transform: translate(5px, 5px); }
+
+[data-mode='astronaut'] .brackets > .bk {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--line-accent);
+  border: none;
+  margin: 4px;
+}
 
 /* status dot */
 .dot {
