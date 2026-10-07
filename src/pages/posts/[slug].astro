@@ -25,30 +25,6 @@ const { Content, headings } = await post.render();
   <BlogNavbar current="blog" />
 
   <main id="main-content" class="post-layout post-two-column-wrap">
-    {headings.length > 0 && (
-      <aside class="post-toc-sidebar">
-        <div class="toc-card">
-          <div class="toc-title-bar">
-            <svg class="toc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-              <line x1="12" y1="22.08" x2="12" y2="12"></line>
-            </svg>
-            TOC
-          </div>
-          <div class="post-toc__list-wrapper">
-            <ul class="post-toc__list">
-              {headings.map((h) => (
-                <li class={`toc-level-${h.depth}`}>
-                  <a href={`#${h.slug}`}>{h.text}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </aside>
-    )}
-
     <article class="post-article">
       <!-- Back button -->
       <div class="post-back" data-reveal="0.1">
@@ -99,6 +75,31 @@ const { Content, headings } = await post.render();
         </div>
       </div>
     </article>
+
+    {headings.length > 0 && (
+      <aside class="post-toc-sidebar">
+        <div class="toc-card">
+          <div class="toc-title-bar">
+            <svg class="toc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            <span class="toc-text-short">TOC</span>
+            <span class="toc-text-full">Table of Contents</span>
+          </div>
+          <div class="post-toc__list-wrapper">
+            <ul class="post-toc__list">
+              {headings.map((h) => (
+                <li class={`toc-level-${h.depth}`}>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </aside>
+    )}
   </main>
 
   <BlogFooter />
@@ -211,6 +212,19 @@ const { Content, headings } = await post.render();
     cursor: default;
     border-bottom: 1px solid transparent;
     transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .toc-text-full {
+    display: none;
+  }
+
+  .toc-card:hover .toc-text-short {
+    display: none;
+  }
+
+  .toc-card:hover .toc-text-full {
+    display: inline;
   }
 
   .toc-icon {
