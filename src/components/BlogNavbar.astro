@@ -13,16 +13,9 @@ const { current = 'blog' } = Astro.props;
     <!-- Brand / Call sign -->
     <a href={`${BASE}`} class="hud-brand" data-cursor="BLACKBOX" aria-label="SOOLOGNZ Intelligence Log">
       <div class="hud-brand__mark">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px; color: var(--accent-hi);" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter">
-          <!-- S: Left swept wing -->
-          <path d="M 50,10 L 15,35 L 40,50 L 20,80" />
-          <!-- K: Central fuselage and right wing -->
-          <path d="M 50,10 L 50,90" />
-          <path d="M 50,50 L 85,35" />
-          <path d="M 50,50 L 80,80" />
-          <!-- L: Tail base (mirrored for symmetry) -->
-          <path d="M 30,90 L 70,90" />
-          <circle cx="50" cy="50" r="4" fill="currentColor" />
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px; color: var(--accent-hi);" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 2L11 13" />
+          <path d="M22 2L15 22L11 13L2 9L22 2Z" />
         </svg>
         <span class="hud-brand__radar"></span>
       </div>
