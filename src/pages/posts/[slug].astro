@@ -53,7 +53,7 @@ const { Content } = await post.render();
         </div>
       </header>
 
-      <div class="post-body panel brackets f-mono" data-reveal="0.3">
+      <div class="post-body panel brackets" data-reveal="0.3">
         <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
         <div class="markdown-render">
           <Content />
@@ -128,13 +128,6 @@ const { Content } = await post.render();
   .post-body {
     padding: clamp(2rem, 5vw, 3.5rem);
     background: rgba(13, 13, 17, 0.6);
-    font-size: var(--fs-sm);
-    line-height: 1.9;
-    color: var(--fg);
-  }
-  .markdown-render {
-    white-space: pre-wrap;
-    font-family: var(--f-mono);
   }
 
   .post-end {
