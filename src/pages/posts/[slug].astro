@@ -27,18 +27,28 @@ const { Content, headings } = await post.render();
   <main id="main-content" class="post-layout post-two-column-wrap">
     {headings.length > 0 && (
       <aside class="post-toc-sidebar">
-      <aside class="post-toc-sidebar">
         <div class="toc-card">
-          <h4 class="toc-title">Table of contents</h4>
-          <ul class="post-toc__list">
-            {headings.map((h) => (
-              <li class={`toc-level-${h.depth}`}>
-                <a href={`#${h.slug}`}>{h.text}</a>
-              </li>
-            ))}
-          </ul>
+          <div class="toc-title-bar">
+            <svg class="toc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            Table of contents
+          </div>
+          <div class="post-toc__list-wrapper">
+            <ul class="post-toc__list">
+              {headings.map((h) => (
+                <li class={`toc-level-${h.depth}`}>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </aside>
       </aside>
     )}
 
@@ -163,44 +173,66 @@ const { Content, headings } = await post.render();
 
   /* Table of Contents Sidebar */
   .post-toc-sidebar {
-    position: sticky;
+    position: fixed;
     top: 150px;
-    width: 250px;
-    flex-shrink: 0;
+    left: 2rem;
+    width: 280px;
+    z-index: 100;
   }
 
-  @media (max-width: 1024px) {
-    .post-two-column-wrap {
-      flex-direction: column;
-    }
+  @media (max-width: 1300px) {
     .post-toc-sidebar {
-      position: static;
-      width: 100%;
-      margin-bottom: 2rem;
+      display: none;
     }
   }
 
   .toc-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #111318;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
   }
   
-  .toc-title {
+  .toc-title-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.2rem;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 1.1rem;
     font-weight: 700;
     color: #e5e7eb;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    cursor: default;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .toc-icon {
+    color: var(--accent);
+  }
+
+  .post-toc__list-wrapper {
+    display: none; /* Hidden by default */
+    padding: 0 1.2rem 1.2rem 1.2rem;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  /* Hover to show */
+  .toc-card:hover .post-toc__list-wrapper {
+    display: block;
+  }
+  
+  .toc-card:hover .toc-title-bar {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .post-toc__list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 1rem 0 0 0;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 0.9rem;
   }
@@ -243,7 +275,7 @@ const { Content, headings } = await post.render();
   }
 
   .post-toc__list a:hover {
-    color: #3b82f6; /* Hashnode Blue */
+    color: #3b82f6;
   }
 
   .post-end {
