@@ -250,10 +250,15 @@ import { BASE } from '../../site.config.mjs';
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    transition: border-color 0.4s;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .post-log-item:hover {
     border-color: var(--line-accent);
+    background: rgba(30, 30, 38, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px);
   }
   .post-log__top {
     display: flex;
