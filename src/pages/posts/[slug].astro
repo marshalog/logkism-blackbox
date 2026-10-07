@@ -24,36 +24,41 @@ const { Content, headings } = await post.render();
 <BaseLayout title={post.data.title} description={post.data.summary}>
   <BlogNavbar current="blog" />
 
-  <main id="main-content" class="post-layout post-two-column-wrap">
-    <article class="post-article">
-      <!-- Back button -->
-      <div class="post-back" data-reveal="0.1">
-        <a href={`${BASE}`} class="link-slash f-mono" data-cursor="BACK">
-          ← BACK TO ARTICLES
-        </a>
+  <main id="main-content" class="post-layout">
+    
+    <div class="post-header-container">
+      <div class="post-header-inner">
+        <!-- Back button -->
+        <div class="post-back" data-reveal="0.1">
+          <a href={`${BASE}`} class="link-slash f-mono" data-cursor="BACK">
+            ← BACK TO ARTICLES
+          </a>
+        </div>
+
+        <!-- Article Header -->
+        <header class="post-header" data-reveal="0.2">
+          <div class="post-header__meta f-mono">
+            <span>DATE: {post.data.date.toISOString().split('T')[0]}</span>
+            <span class="meta-sep">·</span>
+            <span>EST. READING: {post.data.readTime}</span>
+          </div>
+
+          <h1 class="post-title f-display" data-split="chars">
+            {post.data.title}
+          </h1>
+
+          <div class="post-tags f-mono">
+            {post.data.tags.map((tag) => (
+              <span class="tag-badge">#{tag}</span>
+            ))}
+          </div>
+        </header>
       </div>
+    </div>
 
-      <!-- Article Header -->
-      <header class="post-header panel brackets" data-reveal="0.2">
-        <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
-        <div class="post-header__meta f-mono">
-          <span>DATE: {post.data.date.toISOString().split('T')[0]}</span>
-          <span class="meta-sep">·</span>
-          <span>EST. READING: {post.data.readTime}</span>
-        </div>
-
-        <h1 class="post-title f-display" data-split="chars">
-          {post.data.title}
-        </h1>
-
-        <div class="post-tags f-mono">
-          {post.data.tags.map((tag) => (
-            <span class="tag-badge">#{tag}</span>
-          ))}
-        </div>
-      </header>
-
-      <div class="post-body panel brackets" data-reveal="0.3">
+    <div class="post-two-column-wrap">
+      <article class="post-article">
+        <div class="post-body panel brackets" data-reveal="0.3">
         <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
         <div class="markdown-render">
           <Content />
@@ -100,6 +105,7 @@ const { Content, headings } = await post.render();
         </div>
       </aside>
     )}
+    </div>
   </main>
 
   <BlogFooter />
@@ -119,15 +125,23 @@ const { Content, headings } = await post.render();
     flex-direction: column;
     gap: 2rem;
   }
+  .post-header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: calc(var(--hud-h) + 2rem) 2rem 0 2rem;
+  }
+  .post-header-inner {
+    max-width: 850px; /* same width as post-article to align perfectly */
+  }
   .post-back {
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
   }
   .post-header {
-    padding: clamp(2rem, 5vw, 3.5rem);
-    background: rgba(13, 13, 17, 0.7);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
   .post-header__meta {
     font-size: var(--fs-xs);
@@ -164,7 +178,7 @@ const { Content, headings } = await post.render();
   .post-two-column-wrap {
     max-width: 1200px;
     margin: 0 auto;
-    padding: calc(var(--hud-h) + 2rem) 2rem 5rem 2rem;
+    padding: 2rem 2rem 5rem 2rem;
     display: flex;
     flex-direction: row;
     gap: 3rem;
