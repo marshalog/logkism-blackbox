@@ -27,10 +27,7 @@ import { BASE } from '../../site.config.mjs';
         <span class="micro">PREPARE TO THE UNIVERSE</span>
       </div>
 
-      <h1 class="blog-hero__title f-display" data-split="chars" style="font-size: clamp(3rem, 7vw, 6rem);">
-        <span>CHAOTIC BLOG</span><br />
-        <span class="outline-text">BY SOOLOGNZ</span>
-      </h1>
+      <h1 class="sr-only">Chaotic Blog by Soolognz</h1>
 
       <p class="blog-hero__lead f-head" data-reveal="0.3">
         Mỗi bài viết là vết tích lưu lại những gì đã nghĩ, đọc, và làm... cũng có cái là huyền cảnh.
@@ -163,8 +160,8 @@ import { BASE } from '../../site.config.mjs';
     z-index: -1;
     background-size: cover;
     background-position: center;
-    opacity: 0.25;
-    filter: blur(6px);
+    opacity: 0.35;
+    filter: blur(4px);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
   }
@@ -174,11 +171,11 @@ import { BASE } from '../../site.config.mjs';
     z-index: 2;
   }
   .blog-hero__avatar {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     border: 2px solid var(--line-accent);
-    padding: 4px;
+    padding: 6px;
     background: var(--bg);
     object-fit: cover;
     box-shadow: 0 0 20px var(--glow);
