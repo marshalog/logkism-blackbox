@@ -126,13 +126,13 @@ function warp(url: URL, name: string) {
   const title = w.querySelector<HTMLElement>('.warp__title')!;
   const log = w.querySelector<HTMLElement>('.warp__log')!;
   const xian = getMode() === 'xianxia';
-  title.textContent = xian ? `Phá không · ${name}` : `Uplink → ${name}`;
+  title.textContent = xian ? `Void Shatter · ${name}` : `Uplink → ${name}`;
   const lines = xian
     ? [
-        ['Ngưng tụ linh lực', '...... <span class="ok">viên mãn</span>'],
-        ['Khắc trận truyền tống', '.. <span class="ok">thành</span>'],
-        [`Toạ độ: <span class="hl">${url.host}</span>`, ''],
-        ['Xé rách hư không — xuất phát', ''],
+        ['Gathering Spiritual Energy', '...... <span class="ok">complete</span>'],
+        ['Engraving Teleport Array', '.. <span class="ok">success</span>'],
+        [`Coordinates: <span class="hl">${url.host}</span>`, ''],
+        ['Tearing the void — departing', ''],
       ]
     : [
         [`resolve <span class="hl">${url.host}${url.pathname}</span>`, ''],
