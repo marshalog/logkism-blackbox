@@ -25,6 +25,30 @@ const { Content, headings } = await post.render();
   <BlogNavbar current="blog" />
 
   <main id="main-content" class="post-layout">
+    {headings.length > 0 && (
+      <aside class="post-toc-sidebar">
+        <div class="post-toc-container">
+          <div class="post-toc__trigger" title="Table of Contents">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </div>
+          <div class="post-toc__dropdown panel brackets">
+            <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
+            <h4 class="f-mono accent" style="font-size: 0.8rem; margin-bottom: 1rem; border-bottom: 1px dashed var(--line); padding-bottom: 0.5rem;">TABLE OF CONTENTS</h4>
+            <ul class="post-toc__list">
+              {headings.map((h) => (
+                <li class={`toc-level-${h.depth}`}>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </aside>
+    )}
+
     <article class="wrap post-article">
       <!-- Back button -->
       <div class="post-back" data-reveal="0.1">
@@ -55,32 +79,6 @@ const { Content, headings } = await post.render();
 
       <div class="post-body panel brackets" data-reveal="0.3">
         <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
-        
-        {headings.length > 0 && (
-          <div class="post-toc">
-            <div class="post-toc__trigger">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="8" y1="6" x2="21" y2="6"></line>
-                <line x1="8" y1="12" x2="21" y2="12"></line>
-                <line x1="8" y1="18" x2="21" y2="18"></line>
-                <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                <line x1="3" y1="18" x2="3.01" y2="18"></line>
-              </svg>
-              <span>Table of Contents</span>
-            </div>
-            <div class="post-toc__dropdown">
-              <ul class="post-toc__list">
-                {headings.map((h) => (
-                  <li class={`toc-level-${h.depth}`}>
-                    <a href={`#${h.slug}`}>{h.text}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-
         <div class="markdown-render">
           <Content />
         </div>
@@ -157,56 +155,69 @@ const { Content, headings } = await post.render();
     position: relative;
   }
 
-  /* Table of Contents */
-  .post-toc {
-    margin-bottom: 2rem;
+  /* Table of Contents Sidebar */
+  .post-toc-sidebar {
+    position: fixed;
+    top: 25%;
+    left: 2rem;
+    z-index: 100;
+  }
+
+  @media (max-width: 1300px) {
+    .post-toc-sidebar {
+      display: none; /* Hide on smaller screens where there's no space on the left */
+    }
+  }
+
+  .post-toc-container {
     position: relative;
-    display: inline-block;
-    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   
   .post-toc__trigger {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    font-family: var(--f-mono);
-    font-size: 0.85rem;
-    color: var(--muted);
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(13, 13, 17, 0.9);
+    border: 1px solid var(--line-accent);
+    border-radius: 50%;
+    color: var(--accent);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   }
 
-  .post-toc:hover .post-toc__trigger {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--fg);
+  .post-toc-container:hover .post-toc__trigger {
+    background: rgba(193, 18, 31, 0.2);
+    color: var(--accent-hi);
+    transform: rotate(90deg);
   }
 
   .post-toc__dropdown {
     position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 0.5rem;
+    top: 0;
+    left: 60px; /* Right next to the button */
     width: max-content;
     max-width: 350px;
-    background: #0f1115;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(13, 13, 17, 0.95);
+    backdrop-filter: blur(10px);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    padding: 1rem;
+    transform: translateX(-10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 1.5rem;
+    pointer-events: none;
   }
 
-  .post-toc:hover .post-toc__dropdown {
+  .post-toc-container:hover .post-toc__dropdown {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(0);
+    pointer-events: auto;
   }
 
   .post-toc__list {
