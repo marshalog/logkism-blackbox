@@ -58,8 +58,7 @@ const { Content, headings } = await post.render();
 
     <div class="post-two-column-wrap">
       <article class="post-article">
-        <div class="post-body panel brackets" data-reveal="0.3">
-        <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
+        <div class="post-body" data-reveal="0.3">
         <div class="markdown-render">
           <Content />
         </div>
@@ -180,8 +179,7 @@ const { Content, headings } = await post.render();
   }
 
   .post-body {
-    padding: clamp(2rem, 5vw, 3.5rem);
-    background: rgba(13, 13, 17, 0.6);
+    padding: 2rem 0;
     position: relative;
   }
 
