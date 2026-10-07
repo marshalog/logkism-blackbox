@@ -126,20 +126,13 @@ function warp(url: URL, name: string) {
   const title = w.querySelector<HTMLElement>('.warp__title')!;
   const log = w.querySelector<HTMLElement>('.warp__log')!;
   const xian = getMode() === 'xianxia';
-  title.textContent = xian ? `Void Shatter · ${name}` : `Uplink → ${name}`;
-  const lines = xian
-    ? [
-        ['Gathering Spiritual Energy', '...... <span class="ok">complete</span>'],
-        ['Engraving Teleport Array', '.. <span class="ok">success</span>'],
-        [`Coordinates: <span class="hl">${url.host}</span>`, ''],
-        ['Tearing the void — departing', ''],
-      ]
-    : [
-        [`resolve <span class="hl">${url.host}${url.pathname}</span>`, ''],
-        ['handshake tls1.3 / x25519', ' .... <span class="ok">OK</span>'],
-        ['verify signature ed25519', ' .... <span class="ok">OK</span>'],
-        ['uplink locked · engaging jump drive', ''],
-      ];
+  title.textContent = `Uplink → ${name}`;
+  const lines = [
+    [`resolve <span class="hl">${url.host}${url.pathname}</span>`, ''],
+    ['handshake tls1.3 / x25519', ' .... <span class="ok">OK</span>'],
+    ['verify signature ed25519', ' .... <span class="ok">OK</span>'],
+    ['uplink locked · engaging jump drive', ''],
+  ];
   log.innerHTML = lines.map(([a, b]) => `<span>&gt; ${a}${b}</span>`).join('');
   const spans = log.querySelectorAll('span:not(.ok):not(.hl)');
 
