@@ -1,11 +1,5 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px; color: #e63b2e;" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter">
-  <!-- S: Left swept wing -->
-  <path d="M 50,10 L 15,35 L 40,50 L 20,80" />
-  <!-- K: Central fuselage and right wing -->
-  <path d="M 50,10 L 50,90" />
-  <path d="M 50,50 L 85,35" />
-  <path d="M 50,50 L 80,80" />
-  <!-- L: Tail base (mirrored for symmetry) -->
-  <path d="M 30,90 L 70,90" />
-  <circle cx="50" cy="50" r="4" fill="currentColor" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <polygon points="15,0 100,0 100,85 85,100 0,100 0,15" fill="#0d0d11" stroke="#c1121f" stroke-width="4"/>
+  <text x="50" y="66" font-family="monospace, sans-serif" font-weight="bold" font-size="46" fill="#f0f0f5" text-anchor="middle" letter-spacing="1">LK</text>
+  <circle cx="50" cy="50" r="38" fill="none" stroke="#2a2a35" stroke-width="2" stroke-dasharray="8 6"/>
 </svg>
