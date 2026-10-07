@@ -18,7 +18,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 ---
 
 <BaseLayout title={post.data.title} description={post.data.summary}>
@@ -55,6 +55,32 @@ const { Content } = await post.render();
 
       <div class="post-body panel brackets" data-reveal="0.3">
         <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
+        
+        {headings.length > 0 && (
+          <div class="post-toc">
+            <div class="post-toc__trigger">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              <span>Table of Contents</span>
+            </div>
+            <div class="post-toc__dropdown">
+              <ul class="post-toc__list">
+                {headings.map((h) => (
+                  <li class={`toc-level-${h.depth}`}>
+                    <a href={`#${h.slug}`}>{h.text}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
+
         <div class="markdown-render">
           <Content />
         </div>
@@ -128,6 +154,92 @@ const { Content } = await post.render();
   .post-body {
     padding: clamp(2rem, 5vw, 3.5rem);
     background: rgba(13, 13, 17, 0.6);
+    position: relative;
+  }
+
+  /* Table of Contents */
+  .post-toc {
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    z-index: 50;
+  }
+  
+  .post-toc__trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    font-family: var(--f-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .post-toc:hover .post-toc__trigger {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--fg);
+  }
+
+  .post-toc__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    width: max-content;
+    max-width: 350px;
+    background: #0f1115;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 1rem;
+  }
+
+  .post-toc:hover .post-toc__dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .post-toc__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--f-mono);
+    font-size: 0.85rem;
+  }
+
+  .post-toc__list li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .post-toc__list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .toc-level-1 { padding-left: 0; font-weight: 600; }
+  .toc-level-2 { padding-left: 0.5rem; }
+  .toc-level-3 { padding-left: 1.5rem; }
+  .toc-level-4 { padding-left: 2.5rem; }
+
+  .post-toc__list a {
+    color: var(--muted);
+    text-decoration: none;
+    display: block;
+    transition: color 0.2s;
+    line-height: 1.4;
+  }
+
+  .post-toc__list a:hover {
+    color: var(--accent-hi);
   }
 
   .post-end {
