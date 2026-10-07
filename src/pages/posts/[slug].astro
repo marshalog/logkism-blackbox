@@ -24,28 +24,21 @@ const { Content, headings } = await post.render();
 <BaseLayout title={post.data.title} description={post.data.summary}>
   <BlogNavbar current="blog" />
 
-  <main id="main-content" class="post-layout">
+  <main id="main-content" class="post-layout post-two-column-wrap">
     {headings.length > 0 && (
       <aside class="post-toc-sidebar">
-        <div class="post-toc-container">
-          <div class="post-toc__trigger" title="Table of Contents">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
-          </div>
-          <div class="post-toc__dropdown panel brackets">
-            <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
-            <h4 class="f-mono accent" style="font-size: 0.8rem; margin-bottom: 1rem; border-bottom: 1px dashed var(--line); padding-bottom: 0.5rem;">TABLE OF CONTENTS</h4>
-            <ul class="post-toc__list">
-              {headings.map((h) => (
-                <li class={`toc-level-${h.depth}`}>
-                  <a href={`#${h.slug}`}>{h.text}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <aside class="post-toc-sidebar">
+        <div class="toc-card">
+          <h4 class="toc-title">Table of contents</h4>
+          <ul class="post-toc__list">
+            {headings.map((h) => (
+              <li class={`toc-level-${h.depth}`}>
+                <a href={`#${h.slug}`}>{h.text}</a>
+              </li>
+            ))}
+          </ul>
         </div>
+      </aside>
       </aside>
     )}
 
@@ -105,11 +98,13 @@ const { Content, headings } = await post.render();
 </BaseLayout>
 
 <style>
-  .post-layout {
-    padding-top: calc(var(--hud-h) + 2rem);
-    padding-bottom: 5rem;
+    flex: 1;
+    max-width: 850px;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
   }
-  .post-article {
+  .post-layout {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -155,94 +150,91 @@ const { Content, headings } = await post.render();
     position: relative;
   }
 
-  /* Table of Contents Sidebar */
-  .post-toc-sidebar {
-    position: fixed;
-    top: 25%;
-    left: 2rem;
-    z-index: 100;
+  /* Two Column Layout */
+  .post-two-column-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: calc(var(--hud-h) + 2rem) 2rem 5rem 2rem;
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
   }
 
-  @media (max-width: 1300px) {
+  /* Table of Contents Sidebar */
+  .post-toc-sidebar {
+    position: sticky;
+    top: 150px;
+    width: 250px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .post-two-column-wrap {
+      flex-direction: column;
+    }
     .post-toc-sidebar {
-      display: none; /* Hide on smaller screens where there's no space on the left */
+      position: static;
+      width: 100%;
+      margin-bottom: 2rem;
     }
   }
 
-  .post-toc-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  .toc-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1.5rem;
   }
   
-  .post-toc__trigger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: rgba(13, 13, 17, 0.9);
-    border: 1px solid var(--line-accent);
-    border-radius: 50%;
-    color: var(--accent);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  }
-
-  .post-toc-container:hover .post-toc__trigger {
-    background: rgba(193, 18, 31, 0.2);
-    color: var(--accent-hi);
-    transform: rotate(90deg);
-  }
-
-  .post-toc__dropdown {
-    position: absolute;
-    top: 0;
-    left: 60px; /* Right next to the button */
-    width: max-content;
-    max-width: 350px;
-    background: rgba(13, 13, 17, 0.95);
-    backdrop-filter: blur(10px);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-10px);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    padding: 1.5rem;
-    pointer-events: none;
-  }
-
-  .post-toc-container:hover .post-toc__dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-    pointer-events: auto;
+  .toc-title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #e5e7eb;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .post-toc__list {
     list-style: none;
     padding: 0;
     margin: 0;
-    font-family: var(--f-mono);
-    font-size: 0.85rem;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.9rem;
   }
 
   .post-toc__list li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    position: relative;
   }
   
   .post-toc__list li:last-child {
     margin-bottom: 0;
   }
 
-  .toc-level-1 { padding-left: 0; font-weight: 600; }
-  .toc-level-2 { padding-left: 0.5rem; }
-  .toc-level-3 { padding-left: 1.5rem; }
-  .toc-level-4 { padding-left: 2.5rem; }
+  .toc-level-1, .toc-level-2 { font-weight: 600; padding-left: 0; }
+  .toc-level-3 { padding-left: 1rem; font-weight: 400; }
+  .toc-level-4 { padding-left: 2rem; font-weight: 400; }
+
+  .post-toc__list li::before {
+    content: "•";
+    position: absolute;
+    left: -12px;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .toc-level-3::before, .toc-level-4::before {
+    left: -2px;
+  }
+
+  .post-toc__list li:hover::before {
+    opacity: 1;
+  }
 
   .post-toc__list a {
-    color: var(--muted);
+    color: #9ca3af;
     text-decoration: none;
     display: block;
     transition: color 0.2s;
@@ -250,7 +242,7 @@ const { Content, headings } = await post.render();
   }
 
   .post-toc__list a:hover {
-    color: var(--accent-hi);
+    color: #3b82f6; /* Hashnode Blue */
   }
 
   .post-end {
