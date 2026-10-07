@@ -37,7 +37,7 @@ const { Content } = await post.render();
       <header class="post-header panel brackets" data-reveal="0.2">
         <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
         <div class="post-header__meta f-mono">
-          <span>DATE: {post.data.date}</span>
+          <span>DATE: {post.data.date.toISOString().split('T')[0]}</span>
           <span class="meta-sep">·</span>
           <span>EST. READING: {post.data.readTime}</span>
         </div>

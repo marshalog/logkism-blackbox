@@ -79,7 +79,7 @@ const POSTS = postsCollection.map(p => ({ ...p.data, slug: p.slug }));
               <div class="post-log__meta f-mono">
                 <span class="accent">LOG #{String(idx + 1).padStart(3, '0')}</span>
                 <span class="meta-sep">//</span>
-                <span>{post.date}</span>
+                <span>{post.date.toISOString().split('T')[0]}</span>
               </div>
               <div class="post-log__readtime micro">{post.readTime}</div>
             </div>
