@@ -66,7 +66,7 @@ const { Content, headings } = await post.render();
       </div>
 
       <!-- Post End Navigation -->
-      <div class="post-end panel" data-reveal="0.4">
+      <div class="post-end" data-reveal="0.4">
         <div class="post-end__inner">
           <div>
             <span class="micro accent">END OF ARTICLE</span>
@@ -323,8 +323,7 @@ const { Content, headings } = await post.render();
   }
 
   .post-end {
-    padding: 2rem;
-    background: rgba(22, 22, 28, 0.5);
+    padding: 2rem 0; /* Adjusted padding since background is removed */
   }
   .post-end__inner {
     display: flex;
