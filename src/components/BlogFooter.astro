@@ -3,16 +3,13 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
 ---
 
 <footer class="hud-footer" role="contentinfo">
-  <div class="wrap hud-footer__inner">
+  <div class="wrap hud-footer__inner" style="max-width: 750px;">
     <div class="hud-footer__col">
       <div class="hud-footer__logo f-display">SOOLOGNZ</div>
     </div>
 
-
-
-    <div class="hud-footer__col">
-      <div class="micro footer-tag">PORTFOLIO</div>
-      <p class="footer-note f-mono">
+    <div class="hud-footer__col" style="text-align: right; display: flex; flex-direction: column; align-items: flex-end;">
+      <p class="footer-note f-mono" style="margin-bottom: 0.8rem;">
         Portfolio của blogger này
       </p>
       <a href={PORTFOLIO_URL} class="btn btn--sm btn--primary" data-cursor="WARP">
@@ -38,14 +35,19 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
     z-index: 10;
   }
   .hud-footer__inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     margin-bottom: 1.5rem;
   }
-  @media (max-width: 860px) {
+  @media (max-width: 600px) {
     .hud-footer__inner {
-      grid-template-columns: 1fr;
+      flex-direction: column;
+      text-align: center;
+    }
+    .hud-footer__col {
+      align-items: center !important;
     }
   }
   .hud-footer__logo {
