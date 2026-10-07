@@ -29,6 +29,7 @@
   margin-top: 2em;
   margin-bottom: 0.8em;
   letter-spacing: -0.015em;
+  scroll-margin-top: 150px;
 }
 
 .markdown-render h1 {

@@ -129,36 +129,47 @@ const { Content, headings } = await post.render();
     max-width: 1200px;
     margin: 0 auto;
     padding: calc(var(--hud-h) + 2rem) 2rem 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
   .post-header-inner {
-    max-width: 850px; /* same width as post-article to align perfectly */
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .post-back {
     margin-bottom: 2rem;
+    align-self: flex-start; /* Keep back button on the left */
   }
   .post-header {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1.5rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
   .post-header__meta {
     font-size: var(--fs-xs);
     display: flex;
     gap: 0.8rem;
     flex-wrap: wrap;
+    justify-content: center;
     color: var(--muted);
   }
   .post-title {
     font-size: clamp(1.8rem, 3.8vw, 3.2rem);
     line-height: 1.1;
     color: var(--fg);
+    text-align: center;
   }
   .post-tags {
     display: flex;
     gap: 0.6rem;
     flex-wrap: wrap;
+    justify-content: center;
   }
   .tag-badge {
     font-size: 11px;
