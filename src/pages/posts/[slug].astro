@@ -2,24 +2,26 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogNavbar from '../../components/BlogNavbar.astro';
 import BlogFooter from '../../components/BlogFooter.astro';
-import { POSTS, type Post } from '../../data/posts';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { BASE } from '../../../site.config.mjs';
 
-export function getStaticPaths() {
-  return POSTS.map((post) => ({
+export async function getStaticPaths() {
+  const postsCollection = await getCollection('posts');
+  return postsCollection.map((post) => ({
     params: { slug: post.slug },
     props: { post },
   }));
 }
 
 interface Props {
-  post: Post;
+  post: CollectionEntry<'posts'>;
 }
 
 const { post } = Astro.props;
+const { Content } = await post.render();
 ---
 
-<BaseLayout title={post.title} description={post.summary}>
+<BaseLayout title={post.data.title} description={post.data.summary}>
   <BlogNavbar current="blog" />
 
   <main id="main-content" class="post-layout">
@@ -35,26 +37,27 @@ const { post } = Astro.props;
       <header class="post-header panel brackets" data-reveal="0.2">
         <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
         <div class="post-header__meta f-mono">
-          <span>DATE: {post.date}</span>
+          <span>DATE: {post.data.date}</span>
           <span class="meta-sep">·</span>
-          <span>EST. READING: {post.readTime}</span>
+          <span>EST. READING: {post.data.readTime}</span>
         </div>
 
         <h1 class="post-title f-display" data-split="chars">
-          {post.title}
+          {post.data.title}
         </h1>
 
         <div class="post-tags f-mono">
-          {post.tags.map((tag) => (
+          {post.data.tags.map((tag) => (
             <span class="tag-badge">#{tag}</span>
           ))}
         </div>
       </header>
 
-      <!-- Article Content Body -->
       <div class="post-body panel brackets f-mono" data-reveal="0.3">
         <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
-        <div class="markdown-render" set:html={post.content.replace(/\n\n/g, '<br/><br/>')} />
+        <div class="markdown-render">
+          <Content />
+        </div>
       </div>
 
       <!-- Post End Navigation -->

@@ -2,8 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogNavbar from '../components/BlogNavbar.astro';
 import BlogFooter from '../components/BlogFooter.astro';
-import { POSTS } from '../data/posts';
+import { getCollection } from 'astro:content';
 import { BASE } from '../../site.config.mjs';
+
+const postsCollection = await getCollection('posts');
+const POSTS = postsCollection.map(p => ({ ...p.data, slug: p.slug }));
 ---
 
 <BaseLayout

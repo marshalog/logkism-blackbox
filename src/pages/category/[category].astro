@@ -2,20 +2,25 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogNavbar from '../../components/BlogNavbar.astro';
 import BlogFooter from '../../components/BlogFooter.astro';
-import { POSTS } from '../../data/posts';
+import { getCollection } from 'astro:content';
 import { BASE } from '../../../site.config.mjs';
 
-export function getStaticPaths() {
-  return [
-    { params: { category: 'aerospace' } },
-    { params: { category: 'cybersecurity' } },
-  ];
+export async function getStaticPaths() {
+  const postsCollection = await getCollection('posts');
+  const categories = [...new Set(postsCollection.map((post) => post.data.category.toLowerCase()))];
+  return categories.map((category) => ({
+    params: { category },
+    props: {
+      posts: postsCollection
+        .filter((post) => post.data.category.toLowerCase() === category)
+        .map(p => ({ ...p.data, slug: p.slug }))
+    },
+  }));
 }
 
 const { category } = Astro.params;
+const { posts: filteredPosts } = Astro.props;
 const formattedCategory = category.toUpperCase();
-
-const filteredPosts = POSTS.filter(p => p.category === formattedCategory);
 ---
 
 <BaseLayout
