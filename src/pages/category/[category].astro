@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogNavbar from '../../components/BlogNavbar.astro';
+import BlogFooter from '../../components/BlogFooter.astro';
+import { POSTS } from '../../data/posts';
+import { BASE } from '../../../site.config.mjs';
+
+export function getStaticPaths() {
+  return [
+    { params: { category: 'aerospace' } },
+    { params: { category: 'cybersecurity' } },
+  ];
+}
+
+const { category } = Astro.params;
+const formattedCategory = category.toUpperCase();
+
+const filteredPosts = POSTS.filter(p => p.category === formattedCategory);
+---
+
+<BaseLayout
+  title={`${formattedCategory} — chaotic blog by soolognz`}
+  description={`Logs and transmissions for sector: ${formattedCategory}`}
+>
+  <BlogNavbar current="blog" />
+
+  <main id="main-content">
+    <section class="section wrap" style="padding-top: calc(var(--hud-h) + 4rem); min-height: 80vh;">
+      <div class="sec-head">
+        <span class="sec-head__idx">//</span>
+        <div class="sec-head__rule"></div>
+        <span class="sec-head__tag">SECTOR: {formattedCategory}</span>
+      </div>
+
+      <div class="posts-stream">
+        {filteredPosts.length > 0 ? (
+          filteredPosts.map((post, idx) => (
+            <article
+              class="post-log-item panel brackets"
+              data-reveal={String(0.1 + idx * 0.1)}
+            >
+              <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
+              <div class="post-log__top">
+                <div class="post-log__meta f-mono">
+                  <span class="accent">LOG #{String(idx + 1).padStart(3, '0')}</span>
+                  <span class="meta-sep">//</span>
+                  <span>{post.date}</span>
+                </div>
+                <div class="post-log__readtime micro">{post.readTime}</div>
+              </div>
+
+              <h2 class="post-log__title f-display">
+                <a href={`${BASE}posts/${post.slug}`} data-cursor="OPEN_LOG">
+                  {post.title}
+                </a>
+              </h2>
+
+              <p class="post-log__summary f-mono">
+                {post.summary}
+              </p>
+
+              <div class="post-log__tags f-mono">
+                {post.tags.map((tag) => (
+                  <span class="tag-pill">#{tag}</span>
+                ))}
+              </div>
+
+              <div class="post-log__footer">
+                <a
+                  href={`${BASE}posts/${post.slug}`}
+                  class="btn btn--sm btn--primary"
+                  data-cursor="DECRYPT"
+                >
+                  <span class="btn__tab"></span>
+                  <span class="btn__fill"></span>
+                  <span class="btn__label">READ ARTICLE →</span>
+                </a>
+                <span class="micro text-muted">SECTOR: {post.category}</span>
+              </div>
+            </article>
+          ))
+        ) : (
+          <div class="f-mono text-muted" style="text-align: center; padding: 4rem;">NO LOGS FOUND IN THIS SECTOR</div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <BlogFooter />
+</BaseLayout>
+
+<style>
+  .posts-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .post-log-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    background: rgba(13, 13, 17, 0.4);
+  }
+  .post-log__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line-accent);
+    padding-bottom: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .post-log__meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  .post-log__title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .post-log__title a {
+    color: var(--fg);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .post-log__title a:hover {
+    color: var(--accent-hi);
+  }
+  .post-log__summary {
+    color: var(--muted);
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    line-height: 1.6;
+    max-width: 800px;
+  }
+  .post-log__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tag-pill {
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--line-accent);
+    font-size: 0.75rem;
+    color: var(--accent);
+    background: rgba(7, 7, 10, 0.6);
+  }
+  .post-log__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--line-accent);
+  }
+</style>

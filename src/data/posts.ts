@@ -4,7 +4,7 @@ export interface Post {
   slug: string;
   title: string;
   date: string;
-  category: 'AEROSPACE' | 'REVERSE-ENG' | 'CTF-WRITEUP' | 'POST-QUANTUM';
+  category: 'AEROSPACE' | 'REVERSE-ENG' | 'CTF-WRITEUP' | 'POST-QUANTUM' | 'CYBERSECURITY';
   readTime: string;
   summary: string;
   tags: string[];
@@ -65,5 +65,49 @@ Transformer[] transformers = new Transformer[] {
   <li>Cập nhật rule WAF để chống lại các kỹ thuật Evasion như Chunked Encoding Abuse.</li>
 </ul>
 `
+  },
+  {
+    slug: 'aero-telemetry-analysis',
+    title: 'Deep Space Network: Decoding Voyager 1 Telemetry Data',
+    date: '2026-09-12',
+    category: 'AEROSPACE',
+    readTime: '15 MIN READ',
+    classification: 'UNCLASSIFIED',
+    tags: ['DSN', 'TELEMETRY', 'RF', 'VOYAGER'],
+    summary: 'A deep dive into decoding the raw telemetry frames received from Voyager 1 using software-defined radio and custom demodulation scripts.',
+    content: '<p>Sample content for Aerospace article 1...</p>'
+  },
+  {
+    slug: 'aero-orbital-mechanics',
+    title: 'Orbital Mechanics: Simulating LEO Satellite Trajectories',
+    date: '2026-08-04',
+    category: 'AEROSPACE',
+    readTime: '18 MIN READ',
+    classification: 'UNCLASSIFIED',
+    tags: ['ORBITAL', 'SIMULATION', 'LEO'],
+    summary: 'Building a Python-based simulation engine for Low Earth Orbit satellite trajectories accounting for atmospheric drag.',
+    content: '<p>Sample content for Aerospace article 2...</p>'
+  },
+  {
+    slug: 'cyber-kernel-exploitation',
+    title: 'Windows Kernel Exploitation: HEVD Stack Overflow',
+    date: '2026-07-22',
+    category: 'CYBERSECURITY',
+    readTime: '25 MIN READ',
+    classification: 'UNCLASSIFIED',
+    tags: ['KERNEL', 'EXPLOIT', 'WINDOWS', 'HEVD'],
+    summary: 'Step-by-step walkthrough of exploiting a stack buffer overflow in the HackSys Extreme Vulnerable Driver to achieve SYSTEM privileges.',
+    content: '<p>Sample content for Cybersecurity article 1...</p>'
+  },
+  {
+    slug: 'cyber-active-directory',
+    title: 'Active Directory: Abusing Resource-Based Constrained Delegation',
+    date: '2026-06-15',
+    category: 'CYBERSECURITY',
+    readTime: '12 MIN READ',
+    classification: 'UNCLASSIFIED',
+    tags: ['AD', 'RBCD', 'RED-TEAM'],
+    summary: 'Understanding and exploiting Resource-Based Constrained Delegation (RBCD) to compromise computer accounts in an Active Directory environment.',
+    content: '<p>Sample content for Cybersecurity article 2...</p>'
   }
 ];
