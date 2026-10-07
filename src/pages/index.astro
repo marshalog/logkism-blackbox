@@ -7,7 +7,7 @@ import { BASE } from '../../site.config.mjs';
 ---
 
 <BaseLayout
-  title="BLACKBOX // INTEL LOG"
+  title="chaotic blog by soolognz"
   description="Classified cybersecurity write-ups, aerospace telemetry analysis, and low-level reverse engineering logs."
 >
   <BlogNavbar current="blog" />
@@ -15,16 +15,23 @@ import { BASE } from '../../site.config.mjs';
   <main id="main-content">
     <!-- HERO HEADER -->
     <section class="blog-hero section wrap">
-      <div class="blog-hero__badge" data-reveal="0.1">
+      <!-- Blurred hero background placeholder -->
+      <div class="blog-hero__bg" aria-hidden="true" style="background-image: url('https://images.unsplash.com/photo-1516104764491-f9b8c0819124?q=80&w=1600');"></div>
+      
+      <div class="blog-hero__avatar-wrap" data-reveal="0.1">
+        <img src="https://github.com/logkism.png" alt="Soolognz Avatar" class="blog-hero__avatar" />
+      </div>
+
+      <div class="blog-hero__badge" data-reveal="0.2">
         <span class="dot dot--red"></span>
         <span class="micro t-cyber">DECLASSIFIED INTELLIGENCE REPOSITORY // PUBLIC LEVEL-1</span>
         <span class="micro t-xian cjk">Tàng Kinh Các · Vạn Kiếp Mật Bản</span>
       </div>
 
       <h1 class="blog-hero__title f-display" data-split="chars">
-        <span>BLACKBOX</span><br />
-        <span class="outline-text">FLIGHT LOGS &</span><br />
-        <span class="accent">EXPLOIT RESEARCH</span>
+        <span>CHAOTIC BLOG</span><br />
+        <span class="outline-text">BY</span><br />
+        <span class="accent">SOOLOGNZ</span>
       </h1>
 
       <p class="blog-hero__lead f-head" data-reveal="0.3">
@@ -35,20 +42,20 @@ import { BASE } from '../../site.config.mjs';
       <div class="filter-bar panel brackets" data-reveal="0.45" id="categories">
         <i class="bk"></i><i class="bk"></i><i class="bk"></i><i class="bk"></i>
         <button class="filter-chip is-active" data-filter="all" data-cursor="ALL">
-          <span>// TOÀN BỘ INTEL</span>
+          <span>// TOÀN BỘ</span>
           <small>({POSTS.length})</small>
         </button>
+        <button class="filter-chip" data-filter="DRONE" data-cursor="DRONE">
+          <span>DRONE</span>
+        </button>
         <button class="filter-chip" data-filter="AEROSPACE" data-cursor="AERO">
-          <span>AEROSPACE & RF</span>
-        </button>
-        <button class="filter-chip" data-filter="REVERSE-ENG" data-cursor="REV">
-          <span>REVERSE ENGINEERING</span>
-        </button>
-        <button class="filter-chip" data-filter="POST-QUANTUM" data-cursor="PQC">
-          <span>HẬU LƯỢNG TỬ PQC</span>
+          <span>KỸ THUẬT HÀNG KHÔNG</span>
         </button>
         <button class="filter-chip" data-filter="CTF-WRITEUP" data-cursor="CTF">
-          <span>CTF WRITE-UPS</span>
+          <span>CTF-WRITEUPS</span>
+        </button>
+        <button class="filter-chip" data-filter="LAB-CHALLENGES" data-cursor="LAB">
+          <span>LAB CHALLENGES</span>
         </button>
       </div>
     </section>
@@ -143,8 +150,40 @@ import { BASE } from '../../site.config.mjs';
 
 <style>
   .blog-hero {
-    padding-top: calc(var(--hud-h) + 2.5rem);
-    padding-bottom: 2rem;
+    position: relative;
+    padding-top: calc(var(--hud-h) + 4rem);
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .blog-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    filter: blur(8px) grayscale(100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+  }
+  .blog-hero__avatar-wrap {
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+  .blog-hero__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid var(--line-accent);
+    padding: 4px;
+    background: var(--bg);
+    object-fit: cover;
+    box-shadow: 0 0 20px var(--glow);
   }
   .blog-hero__badge {
     display: inline-flex;

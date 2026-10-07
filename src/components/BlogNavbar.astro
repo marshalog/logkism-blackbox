@@ -28,20 +28,20 @@ const { current = 'blog' } = Astro.props;
 
     <!-- Navigation links -->
     <nav class="hud-links" aria-label="Blog Navigation">
-      <a href={`${BASE}`} class={`hud-link ${current === 'blog' ? 'is-active' : ''}`} data-cursor="ALL">
+      <a href={`${BASE}#feed`} class="hud-link" data-cursor="AERO">
         <span class="hud-link__idx">01</span>
-        <span class="t-cyber">ALL TRANSMISSIONS</span>
-        <span class="t-xian cjk">Toàn Bộ Mật Điển</span>
+        <span class="t-cyber">AEROSPACE</span>
+        <span class="t-xian cjk">Hàng Không</span>
       </a>
-      <a href={`${BASE}#categories`} class={`hud-link ${current === 'categories' ? 'is-active' : ''}`} data-cursor="SECTORS">
+      <a href={`${BASE}#feed`} class="hud-link" data-cursor="CYBER">
         <span class="hud-link__idx">02</span>
-        <span class="t-cyber">SECTORS & TAGS</span>
-        <span class="t-xian cjk">Phân Loại Tâm Pháp</span>
+        <span class="t-cyber">CYBERSECURITY</span>
+        <span class="t-xian cjk">Bảo Mật</span>
       </a>
-      <a href={`${BASE}#feed`} class={`hud-link ${current === 'archive' ? 'is-active' : ''}`} data-cursor="CHRONO">
+      <a href={PORTFOLIO_URL} class="hud-link" data-cursor="ABOUT">
         <span class="hud-link__idx">03</span>
-        <span class="t-cyber">LOG CHRONOLOGY</span>
-        <span class="t-xian cjk">Niên Giám</span>
+        <span class="t-cyber">ABOUT ME</span>
+        <span class="t-xian cjk">Giới Thiệu</span>
       </a>
     </nav>
 

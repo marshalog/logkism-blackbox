@@ -54,9 +54,8 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
   </head>
 
   <body data-site="blackbox" data-portfolio-url={PORTFOLIO_URL}>
-    <!-- Background Canvas and Artwork Stack -->
+    <!-- Background Artwork Stack -->
     <div class="bg-stack" aria-hidden="true">
-      <canvas id="nebula-canvas"></canvas>
       <div class="bg-art bg-art--cyber" style={`background-image: url('${BASE}/images/bg_cyber.jpg'.replace('//', '/'));`}></div>
       <div class="bg-art bg-art--xian" style={`background-image: url('${BASE}/images/bg_xianxia.jpg'.replace('//', '/'));`}></div>
       <div class="bg-art bg-art--astro" style={`background-image: url('${BASE}/images/bg_astro.jpg'.replace('//', '/')); filter: grayscale(1) brightness(0.4) contrast(1.8);`}></div>
@@ -82,7 +81,6 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
         </div>
       </div>
 
-      <canvas id="particle-canvas"></canvas>
       <div class="bg-scan"></div>
       <div class="bg-grain"></div>
       <div class="bg-vignette"></div>
@@ -152,8 +150,6 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
       import { initTransitions, arrive } from '../scripts/core/transition';
 
       document.addEventListener('DOMContentLoaded', () => {
-        initNebula(document.getElementById('nebula-canvas') as HTMLCanvasElement);
-        initParticles(document.getElementById('particle-canvas') as HTMLCanvasElement);
         initArtParallax();
         initCursor();
         initClickFx();
