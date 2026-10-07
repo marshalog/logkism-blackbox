@@ -21,7 +21,7 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} — {siteName}</title>
+    <title>{title.toLowerCase().includes('chaotic') ? 'Chaotic Blog by soolognz' : `${title} — Chaotic Blog by soolognz`}</title>
     <link rel="icon" type="image/svg+xml" href={`${BASE}favicon.svg`} />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#07070a" />
