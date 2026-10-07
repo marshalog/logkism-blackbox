@@ -56,30 +56,11 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
   <body data-site="blackbox" data-portfolio-url={PORTFOLIO_URL}>
     <!-- Background Artwork Stack -->
     <div class="bg-stack" aria-hidden="true">
-      <div class="bg-art bg-art--cyber" style={`background-image: url('${BASE}/images/bg_cyber.jpg'.replace('//', '/'));`}></div>
-      <div class="bg-art bg-art--xian" style={`background-image: url('${BASE}/images/bg_xianxia.jpg'.replace('//', '/'));`}></div>
-      <div class="bg-art bg-art--astro" style={`background-image: url('${BASE}/images/bg_astro.jpg'.replace('//', '/')); filter: grayscale(1) brightness(0.4) contrast(1.8);`}></div>
+      <div class="bg-art bg-art--cyber" style={`background-image: url('${BASE}images/bg_cyber.jpg'.replace('//', '/'));`}></div>
+      <div class="bg-art bg-art--xian" style={`background-image: url('${BASE}images/bg_xianxia.jpg'.replace('//', '/'));`}></div>
+      <div class="bg-art bg-art--astro" style={`background-image: url('${BASE}images/bg_blueprint.jpg'.replace('//', '/')); opacity: 0.15; filter: blur(4px);`}></div>
       
-      <!-- Aerospace Mode Fleet (Jets, Drone) - Background Layer -->
-      <div class="astro-fleet">
-        <div class="astro-fleet__unit astro-fleet__unit--f22">
-          <svg viewBox="0 0 100 100" fill="currentColor"><path d="M 50 10 L 55 30 L 90 60 L 90 70 L 55 65 L 55 85 L 70 100 L 30 100 L 45 85 L 45 65 L 10 70 L 10 60 L 45 30 Z"/></svg>
-        </div>
-        <div class="astro-fleet__unit astro-fleet__unit--su57">
-          <svg viewBox="0 0 100 100" fill="currentColor"><path d="M 50 5 L 60 35 L 95 65 L 95 75 L 60 70 L 60 90 L 75 105 L 25 105 L 40 90 L 40 70 L 5 75 L 5 65 L 40 35 Z"/></svg>
-        </div>
-        <div class="astro-fleet__unit astro-fleet__unit--drone">
-          <svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" stroke-width="2">
-            <circle cx="50" cy="50" r="10" />
-            <line x1="20" y1="20" x2="80" y2="80" />
-            <line x1="80" y1="20" x2="20" y2="80" />
-            <circle cx="20" cy="20" r="12" fill="none" stroke-dasharray="4 4" />
-            <circle cx="80" cy="80" r="12" fill="none" stroke-dasharray="4 4" />
-            <circle cx="80" cy="20" r="12" fill="none" stroke-dasharray="4 4" />
-            <circle cx="20" cy="80" r="12" fill="none" stroke-dasharray="4 4" />
-          </svg>
-        </div>
-      </div>
+
 
       <div class="bg-scan"></div>
       <div class="bg-grain"></div>
