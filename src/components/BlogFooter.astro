@@ -6,37 +6,25 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
   <div class="wrap hud-footer__inner">
     <div class="hud-footer__col">
       <div class="hud-footer__logo f-display">SOOLOGNZ</div>
-      <p class="hud-footer__desc f-mono">
-        CLASSIFIED CYBERSECURITY RECON & AEROSPACE WRITE-UPS<br />
-        Phân tích chuyên sâu · Zero-Day Exploit · Giao thức truyền tin vũ trụ
-      </p>
-      <div class="hud-footer__badge">
-        <span class="dot dot--red"></span>
-        <span class="micro">DECLASSIFIED INTEL // PUBLIC ACCESS GRANTED</span>
-      </div>
     </div>
 
-    <div class="hud-footer__col">
-      <div class="micro footer-tag">INDEX & TOPICS</div>
-      <ul class="footer-links f-mono">
-        <li><a href={`${BASE}`} class="link-slash" data-cursor="FILTER">01 // Vệ tinh & Sóng vô tuyến RF</a></li>
-        <li><a href={`${BASE}`} class="link-slash" data-cursor="FILTER">02 // Reverse Engineering Firmware bay</a></li>
-        <li><a href={`${BASE}`} class="link-slash" data-cursor="FILTER">03 // CTF Write-ups & Kernel Exploitation</a></li>
-        <li><a href={`${BASE}`} class="link-slash" data-cursor="FILTER">04 // Vi mã hoá lượng tử vi điều khiển</a></li>
-      </ul>
-    </div>
+
 
     <div class="hud-footer__col">
-      <div class="micro footer-tag">PORTFOLIO & MISSION CONTROL</div>
+      <div class="micro footer-tag">PORTFOLIO</div>
       <p class="footer-note f-mono">
-        Trở về trang Portfolio chính tại <a href={PORTFOLIO_URL} class="link-slash">LOGKISM</a> để xem toàn bộ hồ sơ kinh nghiệm và thông tin liên hệ.
+        Portfolio của blogger này
       </p>
+      <a href={PORTFOLIO_URL} class="btn btn--sm btn--primary" data-cursor="WARP">
+        <span class="btn__tab"></span>
+        <span class="btn__fill"></span>
+        <span class="btn__label">VIEW PORTFOLIO ↗</span>
+      </a>
     </div>
   </div>
 
   <div class="hud-footer__bar wrap">
-    <span class="micro">© {new Date().getFullYear()} SOOLOGNZ BY LOGKISM. CLASSIFIED RESEARCH LOG.</span>
-    <span class="micro">DATA STREAM: SECURE // NO AI SLOP ALLOWED</span>
+    <span class="micro">© {new Date().getFullYear()} SOOLOGNZ BY LOGKISM.</span>
   </div>
 </footer>
 
@@ -51,7 +39,7 @@ import { BASE, PORTFOLIO_URL } from '../../site.config.mjs';
   }
   .hud-footer__inner {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1.2fr;
+    grid-template-columns: 1fr 1fr;
     gap: clamp(2rem, 5vw, 4rem);
     margin-bottom: 4rem;
   }

@@ -63,7 +63,7 @@
   --cut-sm: 8px;
   --gutter: clamp(1.25rem, 4vw, 4rem);
   --maxw: 1440px;
-  --hud-h: 64px;
+  --hud-h: 80px;
 
   color-scheme: dark;
 }

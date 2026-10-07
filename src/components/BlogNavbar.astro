@@ -13,10 +13,7 @@ const { current = 'blog' } = Astro.props;
     <!-- Brand / Call sign -->
     <a href={`${BASE}`} class="hud-brand" data-cursor="BLACKBOX" aria-label="SOOLOGNZ Intelligence Log">
       <div class="hud-brand__mark">
-        <svg viewBox="0 0 24 24" class="hud-brand__sigil" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 20px; height: 20px;">
-          <path d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z" stroke-linejoin="round"/>
-          <circle cx="12" cy="12" r="3"/>
-        </svg>
+        <img src={`${BASE}images/logo.jpg`} alt="Soolognz Logo" style="width: 100%; height: 100%; object-fit: cover;" />
         <span class="hud-brand__radar"></span>
       </div>
       <div class="hud-brand__info">
